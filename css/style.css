@@ -79,7 +79,7 @@ body {
 .buzo {
     grid-column: 2/3;
     grid-row: 1/3;
-    width: 50%;
+    width: 100%;
     margin: auto ;
 }
 .section_2{
@@ -184,6 +184,7 @@ button:hover {
 
 .producto:hover{
     transform: translateY(-5px);
+    transform: translateY(5px);
     top: 10px
 }
 
