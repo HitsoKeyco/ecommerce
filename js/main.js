@@ -57,14 +57,22 @@
         for (product of db.products) {
 
             html += ` 
+                    
                     <div class="card">
+
                         <div class="card_top">
-                            <img class="producto" src="${product.image}" alt="">
+                            <img class="img_producto" src="${product.image}" alt="">
                         </div>
+
                         <div class="card_dawn">
-                            <p><span>$${product.price}&nbsp;&nbsp;&nbsp;</span><span> Stock: ${product.quantity}</span><br>${product.name}</p>
-                        </div>                    
+                            <span>$${product.price}&nbsp;&nbsp;&nbsp;</span>
+                            <span> Stock: ${product.quantity}</span><br>
+                            <p class = "description_product">${product.name}</p>
+                            <i class='bx bx-plus' id ="${product.id}" ></i>
+                        </div>      
+
                     </div>
+                    
                 `;
         }
                 productsHTML.innerHTML = html;
