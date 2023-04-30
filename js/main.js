@@ -80,3 +80,16 @@
 
     console.log(main());
 }
+
+//* Nav Transparente
+{
+    window.onscroll = function() {
+        if (document.body.scrollTop > 100) {
+            document.querySelector('.nav_reveal').classList.add('#nav_reveal_function');
+        } else {
+            document.querySelector('.nav_reveal').classList.remove('#nav_reveal_function');
+        }
+    }
+    console.log(window.onscroll)
+}
+
