@@ -54,29 +54,17 @@ body {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;    
-    
-    
-    
-}
-
-.nav_reveal {
-    position: absolute;
-    top: 0;
-    display: flex;        
-    height: 70px;   
     width: 100%;
-    background-color: var(--white);
-    opacity:  1;
-    z-index: -1000;
-}
-
-#nav_reveal_function {
     
-    opacity: 0;
+    background-color: white;
+    background-color: transparent;
 }
 
-
+.nav_show {
+    background-color: white;
+    height: 60px;
+    box-shadow: var(--shadow-general);    
+}
 
 .nav_header {
     display: flex;

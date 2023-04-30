@@ -84,12 +84,11 @@
 //* Nav Transparente
 {
     window.onscroll = function() {
-        if (document.body.scrollTop > 100) {
-            document.querySelector('.nav_reveal').classList.add('#nav_reveal_function');
+        if (document.body.scrollTop > window.innerHeight) {
+            document.querySelector('.nav').classList.add('nav_show');
         } else {
-            document.querySelector('.nav_reveal').classList.remove('#nav_reveal_function');
+            document.querySelector('.nav').classList.remove('nav_show');
         }
     }
-    console.log(window.onscroll)
+    
 }
-
