@@ -13,52 +13,61 @@
 <body>
     <main>
       <div class="container">
+        <div class="top" id="top"></div>
         <div class="nav" id="nav">
           <div class="nav_header">
+
             <div class="nav_left">
               <img src="./img/academlo-icon-shadow.png" alt="icon_shadow" style="width: 35px;">
               <span>STORE</span>
-              <ul class="menu " id="menu">
+              <ul class="menu" id="menu">
                 <li>
-                  <a href="#">Home</a>
+                  <a  class="link_menu" href="#top">Home</a>
                 </li>
                 <li>
-                  <a href="#">Products</a>                  
+                  <a class="link_menu" href="#button">Products</a>                  
                 </li>
               </ul>
+
             </div>
             
             <div class="nav_right">
-              <a href="#"><img src="./img/dark_mode.png" alt="" style="width: 20px;"></a>
-              <a href="#"><img src="./img/carrito.png" alt="" style="width: 20px;"></a>
-              <a href="#"><img class="menu_hamburguesa"src="./img/menu.svg" alt="" style="width: 25px;"></a>
-              
-            </div>                    
+              <i class='bx bx-moon moon_icon'></i>
+              <i class='bx bx-cart-alt cart_icon'></i>
+              <i class='bx bx-menu menu_hamburguesa' ></i>      
+            </div>
           </div>
+
+          <div class="cart">
+            <i class='bx bx-x cart_cerrar'></i>
+            <div class="card_products"></div>
+            <div class="card_total"></div>
+          </div> 
+          
         </div>          
 
         <div class="banda"></div>
         <img class="buzo" src="./img/sweater2.png" alt="">
 
         <section class="section_2">
-          <h1>New Sweatshirt COLLECTIONS 2022</h1>
+          <h1>New Sweatshirt<br>COLLECTIONS 2022</br></h1>
           <h3>Latest arrival of the new Hanes Midweight Crewneck sweatshirt imported from the 2022 series, with a modern design.</h3>
           <span>$14.00</span>
           <button>Show More</button>
         </section>
 
-        <section class="button">
+        <section class="button" id="button">
           <div class="button_up">
-            <button><span>Show all<br></span>show all products</button>
-            <button><span>Shirt<br></span>7 products</button>
+            <button><span class="title_button">Show all<br></span>show all products</button>
+            <button><span class="title_button">Shirt<br></span>7 products</button>
           </div>
           <div class="button_down">
-            <button><span>Hoddies<br></span>6 products</button>
-            <button><span>Sweater<br></span>5 products</button>
+            <button><span class="title_button">Hoddies<br></span>6 products</button>
+            <button><span class="title_button">Sweater<br></span>5 products</button>
           </div>
         </section>
 
-        <section class="products">
+        <section class="products" id="products">
           <div class="contenedor_productos"></div>
         </section>
       </div>
