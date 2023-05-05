@@ -77,10 +77,13 @@ window.onscroll = () => animationScroll();
                     JSON.parse(window.localStorage.getItem('cart')) || {},
         };
 
-        pintarProducts(db)
+        pintarProducts(db);
         mostrarCart();
-        insertarProductosAlCart(db)
-        validarDatosCart(db)
+        insertarProductosAlCart(db);
+        validarDatosCart(db);
+        manejoDatosCart(db)
+
+
     }
 
     main();
@@ -105,7 +108,7 @@ function pintarProducts(db){
                         <span> Stock: ${product.quantity}</span><br>
                         <p class = "description_product">${product.name}</p>
                         <div class = "add">
-                        <i class='bx bx-plus' id ="${product.id}" ></i>
+                        <i class='bx bx-plus plus' id ="${product.id}" ></i>
                         </div>
                     </div>      
 
@@ -115,6 +118,8 @@ function pintarProducts(db){
     }    
     productsHTML.innerHTML = html;
 }
+
+
 
 function mostrarCart() {
     const cartIconHTML =document.querySelector('.cart_icon');
@@ -144,13 +149,14 @@ function insertarProductosAlCart(db) {
                     <img class = "img_cart_in"src="${image}" alt = "image" />
                 </div>
                 <div class = "card_product_body">
-                    <h4>${name} | $${price}</h4>
-                    <p>Stock: | ${quantity}</p>
+                    <h4>${name}</h4>
+                    <p>Stock: ${quantity} | <span class="precio_cart">$${price}</span></p>
+                    <span class="subtotal_cart">Subtotal:</span>
 
-                    <div class = "card_product_ body_op">
+                    <div class = "card_product_ body_op" id="${id}">
                         <i class='bx bx-minus'></i>
                         <span>${amount} unit </span>
-                        <i class='bx bx-plus' ></i>                        
+                        <i class='bx bx-plus plus_add' ></i>                        
                         <i class='bx bxs-trash' ></i>
                     </div>
 
@@ -160,8 +166,8 @@ function insertarProductosAlCart(db) {
         `
         
     }
-    console.log(html)
     cardProducts.innerHTML = html;
+
 }
 
 function validarDatosCart(db){
@@ -183,7 +189,8 @@ function validarDatosCart(db){
                     db.cart[productFind.id] = {...productFind, amount: 1};
                 }
         
-                window.localStorage.setItem('cart', JSON.stringify(db.cart))                               
+                window.localStorage.setItem('cart', JSON.stringify(db.cart));
+                insertarProductosAlCart(db)
             }
         
         });
@@ -191,5 +198,42 @@ function validarDatosCart(db){
 }
 
 
+function manejoDatosCart(db){
+            const cartProducts = document.querySelector('.card_products');
+            cartProducts.addEventListener('click',function(e){
+                
+                if(e.target.classList.contains('bx-plus')){
+                    const id = Number(e.target.parentElement.id);
+                    const productFind = db.products.find(
+                        (product) => product.id ===id
+                    );
 
+                    if(productFind.quantity === db.cart[productFind.id].amount)
+                        return alert('no tenemos mas en bodega');
+
+                    db.cart[id].amount++;
+                }
+                if(e.target.classList.contains('bx-minus')){
+                    const id = Number(e.target.parentElement.id);
+                    if(db.cart[id].amount ===1){
+                        const response = confirm('¿estas seguro de que quieres eliminar este producto?')
+                        if(!response) return;                        
+                        delete db.cart[id];
+                    }else{
+                        db.cart[id].amount--;
+                    }
+
+                    
+                }
+                if(e.target.classList.contains('bxs-trash')){
+                    const id = Number(e.target.parentElement.id);
+                    const response = confirm('¿estas seguro de que quieres eliminar este producto?')
+                        if(!response) return;   
+                    delete db.cart[id];
+                }
+
+                window.localStorage.setItem('cart', JSON.stringify(db.cart))
+                insertarProductosAlCart(db);
+        });
+}
     
