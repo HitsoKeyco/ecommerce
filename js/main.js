@@ -81,9 +81,44 @@ window.onscroll = () => animationScroll();
         mostrarCart();
         insertarProductosAlCart(db);
         validarDatosCart(db);
-        manejoDatosCart(db)
+        manejoDatosCart(db);
 
+        const btnBuy = document.querySelector('.btn_comprar');
+        btnBuy.addEventListener('click', function () {
+            if(!Object.values(db.cart).length) return alert('No lleva productos en el carrito');
+            const response = confirm('seguro que quieres comprar');
+            if(!response) return;
 
+            const actInventario = [];
+            for (const product of db.products){
+                const productCart = db.cart[product.id]
+                if(product.id === productCart?.id){
+                    actInventario.push({
+                        ...product,
+                        quantity: product.quantity - productCart.amount,
+                        
+                    });
+                    const agradecimiento = confirm('Nos vimos y nos conocimos, hasta siempre!!')
+                }else{
+                    actInventario.push(product);
+                }           
+        }
+
+        db.products = actInventario;
+        db.cart = {};
+
+        window.localStorage.setItem('products', JSON.stringify(db.products));
+        window.localStorage.setItem('cart', JSON.stringify(db.cart));
+        
+        pintarProducts(db);
+        insertarProductosAlCart(db);
+
+        });
+
+        
+        
+        
+    
     }
 
     main();
@@ -105,10 +140,16 @@ function pintarProducts(db){
 
                     <div class="card_dawn">
                         <span>$${product.price}&nbsp;&nbsp;&nbsp;</span>
+
                         <span> Stock: ${product.quantity}</span><br>
+
                         <p class = "description_product">${product.name}</p>
+
                         <div class = "add">
-                        <i class='bx bx-plus plus' id ="${product.id}" ></i>
+                            
+                            ${product.quantity ? `<i class='bx bx-plus plus ' id ='${product.id}' ></i>` : '<p class="soldOut">sold out</p>'}
+                                
+                            
                         </div>
                     </div>      
 

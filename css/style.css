@@ -269,7 +269,21 @@ ul {
     height: 40%;
     font-weight: bold;
     font-family: 'Noto Sans', sans-serif;
-    margin-top: 20px;    
+    margin-top: 20px;
+    cursor: pointer;    
+}
+
+.soldOut{
+    position: absolute;
+    top: 283px;
+    left: 85px;
+    background-color: var(--first-color);
+    font-size: 1em;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 5px;
+    
+    color: var(--white);
 }
 
 .banda {
@@ -415,7 +429,7 @@ button:hover {
     font-size: 1em;
 }
 
-.add{
+.plus{
     background-color: var(--white);
     width: 50px;
     height: 50px;
@@ -426,12 +440,12 @@ button:hover {
     cursor: pointer;
     position: absolute;
     top: 230px;
-    right: 20px;
+    right: 20px; 
     box-shadow: var(--shadow-general);
 
     display: flex;
     justify-content: center;    
-    align-items: center;
+    align-items: center; */
 
     
 }
