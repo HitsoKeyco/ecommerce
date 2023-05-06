@@ -28,6 +28,7 @@ body {
         --border-color: hsl(0, 0%, 94%);
         --h-header: 3rem;
         --shadow-general: 0 .5rem 1rem rgba(0, 0, 0, .15);
+        --black:  rgb(0, 0, 0);
         --z-header-nav: 1000;
         --z-handle-icon-navbar: 2000;
         --z-content-cart: 3000;
@@ -92,6 +93,7 @@ body {
 .cart_icon {
     font-size: 1.5em;
     cursor: pointer;
+    position: relative;
 }
 
 .moon_icon {
@@ -158,6 +160,33 @@ ul {
     flex-direction: column;
     transition: right 0.5s;
 }
+
+.cantidad_de_productos{
+    font-size: 0.4em;
+    font-family: 'Noto Sans', sans-serif;
+    background-color: var(--black);
+    color: var(--white);
+    width: 18px;  
+    height: 18px;
+    border-radius: 9px;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: absolute;
+    right: -8px;
+    top: 10px;
+}
+
+.subtotal_cart{
+    font-size: 1em;
+}
+
+.stock_cart{
+    font-size: 0.8em;
+}
+
 
 .cart_show {
     right: 0%;
@@ -237,7 +266,14 @@ ul {
     color: var(--first-color);
 }
 
+.info_cantidad {
+    font-size: 0.8em;
+}
 
+.info_total {
+    font-size: 1em;
+    font-weight: bold;
+}
 /* ---------------end cart--- */
 .plus_add{
     cursor: pointer;
@@ -445,12 +481,102 @@ button:hover {
 
     display: flex;
     justify-content: center;    
-    align-items: center; */
+    align-items: center; 
 
     
 }
 
+.contenedor_footer{
 
+    margin-top: 100px;
+    
+    width: 100vw;
+    display: grid;
+    grid-template-columns: repeat(6 , 1fr); 
+    grid-template-rows: auto auto;
+    height: max-content; 
+    background-color: var(--border-color);
+}
+
+.secciones_footer{
+    grid-column: 1 / 7;
+    grid-row: 1 / 2;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    
+}
+
+.title_footer {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.icon_redes{
+    display: flex;    
+}
+
+.icon_redes * {
+    font-size: 1.5em;
+    display: flex;
+    padding: 10px;
+
+}
+
+.datos_personales {
+    grid-column: 1 / 7;
+    grid-row: 2 / 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    
+}
+
+.datos_personales :nth-child(1){
+    background-color: var(--first-color);
+    color: var(--white);
+    padding: 10px;
+    font-size: 0.8em;
+}
+
+
+@media (min-width:700px) {
+
+    .contenedor_footer{      
+        grid-template-rows: 200px  auto;
+        height: max-content;
+        margin-top: 100px;
+    }
+
+    .secciones_footer{
+        grid-column: 1 / 7;
+        grid-row: 1 / 2;
+        display: flex;
+        justify-content: center;
+        padding: 20px;
+        display: flex;
+        flex-direction: row;
+        gap: 150px
+    }
+    
+
+    .icon_redes * {
+        font-size: 1.5em;
+        display: flex;
+        padding: 10px;
+        
+    }
+
+    .datos_personales {
+        grid-column: 1 / 7;
+        grid-row: 2 / 3;
+    }
+
+
+
+}
 
 @media (min-width:900px) {
 

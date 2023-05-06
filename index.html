@@ -33,7 +33,9 @@
             
             <div class="nav_right">
               <i class='bx bx-moon moon_icon'></i>
-              <i class='bx bx-cart-alt cart_icon'></i>
+              <i class='bx bx-cart-alt cart_icon'>
+                <span class="cantidad_de_productos">0</span>
+              </i>
               <i class='bx bx-menu menu_hamburguesa' ></i>      
             </div>
           </div>
@@ -43,7 +45,7 @@
             <div class="card_products"></div>
             <div class="card_total">
               <div class="total_info">
-                <span>Total</span><span>Cantidad</span>
+                <span class="info_cantidad"></span><span class="info_total"></span>
               </div>
                 <button class="btn btn_comprar">Comprar</button>
 
@@ -79,6 +81,43 @@
       </div>
     </main>
     <footer>
+      <div class="contenedor_footer">
+        <div class="secciones_footer">
+        <section>
+          <span class = "title_footer">Our information</span>
+          <p class="text_footer">Toluca - Mexico</p>
+        </section>
+
+        <section>
+          <span class = "title_footer">About Us</span>
+          <p class="text_footer">Support Center</p>
+          <p class="text_footer">Customer Support</p>
+          <p class="text_footer">About Us</p>
+          <p class="text_footer">Copy Right</p>
+        </section>
+
+        <section>
+          <span class = "title_footer">About Us</span>
+          <p class="text_footer">Hoddies</p>
+          <p class="text_footer">Shirt</p>
+          <p class="text_footer">About Us</p>
+          <p class="text_footer">Sweatshirt</p>
+        </section>
+
+        <section class = "redes_sociales">          
+            <span class = "title_footer">Social</span>          
+          <div class="icon_redes">
+            <i class='bx bxl-facebook-square'></i>
+            <i class='bx bxl-twitter' ></i>
+            <i class='bx bxl-instagram' ></i>
+          </div>
+        </section>    
+      </div>
+      <section class="datos_personales">
+        <h6 class="datos_personales_h6">Sergio Gabriel Olivo Orellana, olivosergio09@gmail.com, https://github.com/HitsoKeyco/ecommerce</h6>
+      </section>                
+      </div>
+
       <script src="./js/main.js"></script>      
     </footer>
 </body>
