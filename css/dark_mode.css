@@ -1,0 +1,24 @@
+:root {
+        /* --white: white; */
+        --first-color: green;
+        /* --button-color: hsl(0, 0%, 17%);
+        --button-color-alt: hsl(0, 0%, 21%);
+        --card-color: hsl(0, 0%, 90%);
+        --title-color: hsl(0, 0%, 15%);
+        --text-color: hsl(0, 0%, 35%);
+        --text-color-light: hsl(0, 0%, 55%);*/
+        --body-color: yellow;
+        /*--container-color: hsl(0, 0%, 100%);
+        --border-color: hsl(0, 0%, 94%);
+        --h-header: 3rem;
+        --shadow-general: 0 .5rem 1rem rgba(0, 0, 0, .15);
+        --black:  rgb(0, 0, 0);
+        --z-header-nav: 1000;
+        --z-handle-icon-navbar: 2000;
+        --z-content-cart: 3000;
+        --z-modalproduct: 4000;
+        font-family: 'Noto Sans', sans-serif;
+        --animate-delay: 2s */
+    
+    
+}

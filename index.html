@@ -7,10 +7,11 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    
 
     <title>Academnlo Store</title>
 </head>
-<body>
+<body class="">
     <main>
       <div class="container">
         <div class="top" id="top"></div>
@@ -18,8 +19,12 @@
           <div class="nav_header">
 
             <div class="nav_left">
-              <img src="./img/academlo-icon-shadow.png" alt="icon_shadow" style="width: 35px;">
-              <span>STORE</span>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48.92 56.48" class="nav_logo-icon" style="width: 35px;">
+                <title>Academlo Logo</title>
+                <g><g><path d="M28.58,15.39H25.16L35.78,36H31.49L20.67,15.71,8.23,38.82H18.94l3-5.43h-3.4l-1.47,2.54h-4l2.69-5.09H25.85l4.28,8H40.67ZM17.23,28.21l3.57-6.6,3.57,6.6Z"></path></g></g>
+              </svg>
+              
+              <span class="name_startup">STORE</span>
               <ul class="menu" id="menu">
                 <li>
                   <a  class="link_menu" href="#top">Home</a>
@@ -58,20 +63,32 @@
         <img class="buzo" src="./img/sweater2.png" alt="">
 
         <section class="section_2">
-          <h1>New Sweatshirt<br>COLLECTIONS 2022</br></h1>
+          <h1>New Sweatshirt COLLECTIONS 2022</br></h1>
           <h3>Latest arrival of the new Hanes Midweight Crewneck sweatshirt imported from the 2022 series, with a modern design.</h3>
           <span>$14.00</span>
-          <button>Show More</button>
+          <button class="button_show_more">Show More</button>
         </section>
 
         <section class="button" id="button">
           <div class="button_up">
-            <button><span class="title_button">Show all<br></span>show all products</button>
-            <button><span class="title_button">Shirt<br></span>7 products</button>
+            <button class="button_category">
+              <span class=" title_button">Show all<br></span>
+              <span class = "title_details">show all products</span>
+            </button>
+            <button class=" button_category">
+              <span class=" title_button">Shirt<br></span>
+              <span class = "title_details">7 products</span>
+            </button>            
           </div>
           <div class="button_down">
-            <button><span class="title_button">Hoddies<br></span>6 products</button>
-            <button><span class="title_button">Sweater<br></span>5 products</button>
+            <button class = "button_category">
+              <span class = "title_button">Hoddies<br></span>
+              <span class = "title_details">6 products</span>
+            </button>
+            <button class = "button_category">
+              <span class = "title_button">Sweater<br></span>
+              <span class = "title_details">5 products</span>
+            </button>            
           </div>
         </section>
 
@@ -85,31 +102,31 @@
         <div class="secciones_footer">
         <section>
           <span class = "title_footer">Our information</span>
-          <p class="text_footer">Toluca - Mexico</p>
+          <a href="#top"><p class="link_footer">Toluca - Mexico</p></a>
         </section>
 
         <section>
           <span class = "title_footer">About Us</span>
-          <p class="text_footer">Support Center</p>
-          <p class="text_footer">Customer Support</p>
-          <p class="text_footer">About Us</p>
-          <p class="text_footer">Copy Right</p>
+          <a href="#top"><p class="link_footer">Support Center</p></a>
+          <a href="#top"><p class="link_footer">Customer Support</p></a>
+          <a href="#top"><p class="link_footer">About Us</p></a>
+          <a href="#top"><p class="link_footer">Copy Right</p></a>
         </section>
 
         <section>
-          <span class = "title_footer">About Us</span>
-          <p class="text_footer">Hoddies</p>
-          <p class="text_footer">Shirt</p>
-          <p class="text_footer">About Us</p>
-          <p class="text_footer">Sweatshirt</p>
+          <span class = "title_footer">Products</span>
+          <a href="#top"><p class="link_footer">Hoddies</p></a>
+          <a href="#top"><p class="link_footer">Shirt</p></a>
+          <a href="#top"><p class="link_footer">About Us</p></a>
+          <a href="#top"><p class="link_footer">Sweatshirt</p></a>
         </section>
 
         <section class = "redes_sociales">          
             <span class = "title_footer">Social</span>          
           <div class="icon_redes">
-            <i class='bx bxl-facebook-square'></i>
-            <i class='bx bxl-twitter' ></i>
-            <i class='bx bxl-instagram' ></i>
+            <a href="#top"><i class='bx bxl-facebook-square icon_redes'></i></a>
+            <a href="#top"><i class='bx bxl-twitter icon_redes' ></i></a>
+            <a href="#top"><i class='bx bxl-instagram icon_redes' ></i></a>
           </div>
         </section>    
       </div>

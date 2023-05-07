@@ -36,7 +36,54 @@ links.forEach((link) => {
 });
 
 
+function navlink(){
+    const links = document.querySelectorAll('.link_menu');
+
+    links.forEach(link => {
+        link.addEventListener('click', () => {
+            links.forEach(link => {
+                link.classList.remove('link_menu_active');
+        });
+
+            link.classList.add('link_menu_active');
+        });
+    });
+}
+
+
+function buttonSelected(){
     
+    const links = document.querySelectorAll('.button_category');
+
+    links.forEach(link => {
+        link.addEventListener('click', () => {
+            links.forEach(link => {
+                link.classList.remove('button_category_selected');
+                
+        });
+
+            link.classList.add('button_category_selected');
+            
+        });
+    });
+}
+buttonSelected();
+
+function toggleDarkMode() {
+    const body = document.body;
+    const moonIcon = document.querySelector(".moon_icon");
+
+    let isDarkMode = false;
+
+    moonIcon.addEventListener('click', () => {
+        isDarkMode = !isDarkMode;
+        body.classList.toggle('dark_mode', isDarkMode);
+        body.classList.toggle('light_mode', !isDarkMode);
+    });
+}
+
+
+toggleDarkMode();
 
 
 //* Conexion a API - Guardado datos en localStorage -  Peticion de datos al localStorage
@@ -76,7 +123,7 @@ links.forEach((link) => {
             cart:   
                     JSON.parse(window.localStorage.getItem('cart')) || {},
         };
-
+        navlink();
         pintarProducts(db);
         mostrarCart();
         insertarProductosAlCart(db);
@@ -84,9 +131,7 @@ links.forEach((link) => {
         manejoDatosCart(db);
         logicacompra(db);
         infoDeCompra(db);
-        cantidaiconcarrito(db)
-    
-
+        cantidaiconcarrito(db);
 
     }
 
@@ -160,14 +205,14 @@ function insertarProductosAlCart(db) {
                     <img class = "img_cart_in"src="${image}" alt = "image" />
                 </div>
                 <div class = "card_product_body">
-                    <h4>${name}</h4>
-                    <p class = "stock_cart">Stock: ${quantity} | <span class="precio_cart">$${price}</span></p>
+                    <h4 class="name_product_cart">${name}</h4>
+                    <p class = "stock_cart"> Stock: ${quantity} | <span class="precio_cart">$${price}</span></p>
                     <span class="subtotal_cart">Subtotal: ${'$' + price * amount}</span>
 
                     <div class = "card_product_ body_op" id="${id}">
                         <i class='bx bx-minus'></i>
-                        <span>${amount} unit </span>
-                        <i class='bx bx-plus plus_add' ></i>                        
+                        <span class = "units_car">${amount} unit </span>
+                        <i class='bx bx-plus plus_add'></i>                        
                         <i class='bx bxs-trash' ></i>
                     </div>
 
@@ -253,7 +298,7 @@ function manejoDatosCart(db){
                 window.localStorage.setItem('cart', JSON.stringify(db.cart))
                 insertarProductosAlCart(db);
 
-                conso
+                
                 
         });
 }
