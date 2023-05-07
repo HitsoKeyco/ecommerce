@@ -362,9 +362,9 @@ ul {
 
 .soldOut{
     position: absolute;
-    top: 283px;
+    top: 311px;
     left: 85px;
-    background-color: var();
+    background-color: var(--bandcolor);
     font-size: 1em;
     padding-left: 10px;
     padding-right: 10px;
