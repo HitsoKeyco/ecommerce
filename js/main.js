@@ -188,7 +188,7 @@ function modal(){
       // Mostrar un modal con la descripción del producto y su información
         Swal.fire({            
             html: modalHTML,
-            showCloseButton: true,
+            showCloseButton: false,
             showConfirmButton: false
         });
     });
