@@ -25,8 +25,7 @@
 
 
 :root {
-        --body-color: hsl(206, 4%, 97%);
-        
+        --body-color: hsl(206, 4%, 97%);        
         --textnavcolor: hsl(0, 0%, 17%);
         --textcolorwhiteglobal: white;
         --navcolor:  white;
@@ -56,18 +55,37 @@
     --black:  white ;
     --card-color: hsla(246, 16%, 5%);
     --pluscolor:  hsl(182, 53%, 74%);
+    transition: 0.5s all;
     
     
 
 }
 
+.light_mode{
+    --body-color: hsl(206, 4%, 97%);    
+    --textnavcolor: hsl(0, 0%, 17%);
+    --textcolorwhiteglobal: white;
+    --navcolor:  white;
+    --white: white;
+    --black:  rgb(0, 0, 0);
+    --bandcolor: hsl(354, 78%, 60%);
+    --textnavseleccion: hsl(354, 78%, 60%);        
+    --button-color: hsl(0, 0%, 17%);
+    --shadow-general: 0 .5rem 1rem rgba(0, 0, 0, .15);
+    --backgroundbuttoncolor:     ;    
+    --text-color-litle: hsl(0, 0%, 55%);
+    --card-color: hsl(0, 0%, 90%);
+    --text-color-light: hsl(0, 0%, 55%);
+    --pluscolor: hsl(354, 78%, 60%);        
+    --container-color: hsl(0%, 0%, 100%);
+    transition: 0.5s all;
+}
+
+
+
 
 body {
     background-color: var(--body-color);
- 
-    
-    
-    
 }
 
 .load {
@@ -78,23 +96,57 @@ body {
     height: 100vh;
     background-color: var(--navcolor);
     z-index: 9999;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    fill: var(--bandcolor);
 
-    
+    fill: var(--bandcolor);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 
 }
 
 .load__gif{
     width: 150px;
     height: 150px;
+    animation: mover 1s ease-in-out infinite alternate;    
+}
 
-    animation: mover 1s ease-in-out infinite alternate;
+.shadows {
+    position: absolute;
+    top: 600px;
+    
+    width: 10px;
+    height: 4px;
+    border-radius: 50%;
+
+    background-color: var(--button-color);
+    
     
 }
 
+.shadows {
+    position: absolute;
+    top: 600px;
+    width: 40px;
+    height: 4px;
+    border-radius: 50%;
+    background-color: rgb(219, 97, 97);
+    animation: growAndShrink 2s ease-in-out infinite;
+    box-shadow: 0px 0px 8px 2px rgba(209, 123, 123, 0.2);
+  }
+  
+  
+  @keyframes growAndShrink {
+    0% {
+     transform: scale(1);
+    }
+    50% {
+      transform: scale(2);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
 @keyframes mover {
     0% {
         transform: translateY(-10px);
@@ -252,6 +304,7 @@ a.active {
     font-size: 1.5em;
     color: var(--textnavcolor);
     cursor: pointer;
+    
     
 }
 
@@ -660,34 +713,28 @@ a.active {
     
 }
 
-.modal-container{
-    position: relative;  
-    background-color: var(--navcolor);
+.modal-container{    
+    background-color: transparent;
     box-shadow: none;
     border: none;
+    
 }
 
 
 
-.swal2-popup {
-    background-color: var(--navcolor);
-} 
+/* swal2-popup swal2-modal swal2-show */
 
-.swal2-modal {
-    background-color: var(--navcolor);
-} 
 
-.swal2-show{
-    background-color: var(--navcolor);
-}
 
 .swal-modal {
     box-shadow: none;
     border: none;
+    
 }
 
 .img_modal{
-    width: 100%;
+    width: 90%;
+    
 }
 
 .modal_description{
@@ -703,8 +750,8 @@ a.active {
 
 .modal_precio{
     position: absolute;
-    bottom: 0;
-    left: 0;
+    bottom: 20px;
+    left: 30px;
     
 
     font-size: 1.2em;
@@ -712,36 +759,12 @@ a.active {
     color: var(--black);
 }
 
-.add_modal{
-    position: absolute;
-    bottom: 0px;
-    left: 80px;
 
-    width: 26px;
-    height: 26px;
-    border-radius: 13px;
-    background-color: var(--button-color);
-    box-shadow: var(--shadow-general);
-
-    color: var(--white);
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    font-size: 1em;
-    cursor: pointer;
-}
-
-.add_modal:active{
-    background-color: var(--bandcolor);
-    
-}
 
 .modal_stock{
     position: absolute;
-    bottom: 0px;
-    right: 0;
+    bottom: 20px;
+    right: 20px;
 }
 
 .modal_name{
@@ -753,6 +776,10 @@ a.active {
 }
 
 .plus_modal {
+    position: absolute;
+    bottom: 20px;
+    left: 100px;
+    
     height: 26px;
     width: 26px;
     border-radius: 13px;
@@ -763,19 +790,22 @@ a.active {
     justify-content: center;
     align-items: center;
 
+    cursor: pointer;
+
 }
 
-.plus_modal:active:hover{
+.plus_modal:hover{
     color: var(--white);
     background-color: var(--bandcolor);
     
 }
 
-.swal2-popup{
+.swal2-popup{ /* modal*/
     position: relative;
     z-index: 100;
     background-color: var(--navcolor);
-    color: var(--text-color-litle)
+    color: var(--text-color-litle);
+    
 }
 
 .soldOut{

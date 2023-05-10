@@ -1,79 +1,110 @@
 
 
 
-window.addEventListener('load', function() {
-  var miLoad = document.querySelector('.load');
-  setTimeout(function() {
-    miLoad.classList.add('miLoadocultar');
-  }, 3000); // cambiar 3000 por el tiempo en milisegundos que desees
-});
+// -----------------Funciones--------------------------- //
 
 
-//* Menu hamburguesa
+function linksMenu(){
+  const links = document.querySelectorAll(".menu li");
+  const boxMenu = document.querySelector(".menu_hamburguesa");
 
-const menu = document.querySelector(".menu");
-const links = document.querySelectorAll(".menu li");
-const boxMenu = document.querySelector(".menu_hamburguesa");
+    boxMenu.addEventListener("click", mostrarMenu);
+        links.forEach((link) => {
+          link.addEventListener("click", mostrarMenu);
 
-function nav(){
-const navbarHMTL = document.querySelector(".nav_efect");
-const navHMTL = document.querySelector(".nav");
+        });
+}
 
-function animationScroll() {
-    let y = window.scrollY;
+function loading(){
+  window.addEventListener('load', function() {
 
-    if (y > 50) {
-      navbarHMTL.classList.add("nav_efect_show");
+    const miLoad = document.querySelector('.load');
+    
+    setTimeout(function() {
+      miLoad.classList.add('miLoadocultar');
       
-    } else {
-      navbarHMTL.classList.remove("nav_efect_show");
+  
+    }, 4000); 
+  });
+  
+  
+  window.addEventListener('load', function() {
+  
+    const miLoad = document.querySelector('.load__gif');
+    
+    setTimeout(function() {
+      miLoad.classList.add('miLoadocultar');
       
-    }
-}
-window.onscroll = () => animationScroll();
-}
-
-
-var enlaces = document.getElementsByClassName("color-enlace");
-for (var i = 0; i < enlaces.length; i++) {
-   enlaces[i].addEventListener("click", function(event) {
-       event.preventDefault(); /* Prevenir el comportamiento predeterminado del enlace */
-      for (var j = 0; j < enlaces.length; j++) {
-         enlaces[j].classList.remove("active"); /* Eliminar la clase "active" de todos los enlaces */
-      }
-
-      this.classList.add("active"); /* Agregar la clase "active" al enlace actual */
-      this.blur(); /* Remover el enfoque del enlace */
-   });
-}
-// -------------------------------------------------------
-
-
-
-//--------------------------------
-function mostrarMenu() {
-    menu.classList.toggle("menu_show");
+  
+    }, 3000); 
+  });
+  
+  
+  
+  window.addEventListener('load', function() {
+  
+    const miLoad = document.querySelector('.shadows');
+    
+    setTimeout(function() {
+      miLoad.classList.add('miLoadocultar');
+      
+  
+    }, 3000); 
+  });
+  
+  
 }
 
-boxMenu.addEventListener("click", mostrarMenu);
-
-links.forEach((link) => {
-    link.addEventListener("click", mostrarMenu);
-
-});
 
 function navlink() {
-    const links = document.querySelectorAll(".link_menu");
-  
-    links.forEach((link) => {
-      link.addEventListener("click", () => {
-          links.forEach((link) => {
-            link.classList.remove("menu_show");
-          });
+  const links = document.querySelectorAll(".link_menu");
 
-          link.classList.add("menu_show");
-      });
+  links.forEach((link) => {
+    link.addEventListener("click", () => {
+        links.forEach((link) => {
+          link.classList.remove("menu_show");
+        });
+
+        link.classList.add("menu_show");
     });
+  });
+}
+
+function mostrarMenu() {
+  const menu = document.querySelector(".menu");
+  menu.classList.toggle("menu_show");
+}
+
+function colorEnlaces(){
+  var enlaces = document.getElementsByClassName("color-enlace");
+  for (var i = 0; i < enlaces.length; i++) {
+    enlaces[i].addEventListener("click", function(event) {
+        event.preventDefault(); /* Prevenir el comportamiento predeterminado del enlace */
+        for (var j = 0; j < enlaces.length; j++) {
+          enlaces[j].classList.remove("active"); /* Eliminar la clase "active" de todos los enlaces */
+        }
+
+        this.classList.add("active"); /* Agregar la clase "active" al enlace actual */
+        this.blur(); /* Remover el enfoque del enlace */
+    });
+}
+
+}
+
+function nav(){
+  const navbarHMTL = document.querySelector(".nav_efect");
+      function animationScroll() {
+          let y = window.scrollY;
+
+          if (y > 50) {
+            navbarHMTL.classList.add("nav_efect_show");
+            
+          } else {
+            navbarHMTL.classList.remove("nav_efect_show");
+            
+          }
+      }
+  window.onscroll = () => animationScroll();
 }
 
 function buttonSelected() {
@@ -103,193 +134,193 @@ function toggleDarkMode() {
   });
 }
 
-//* Conexion a API - Guardado datos en localStorage -  Peticion de datos al localStorage
+function opening(){
 
-// Promesa asincrona
-async function getProducts() {
-   try {
-    //asignamos a variable la peticion a la API
-      const data = await fetch(
-      "https://ecommercebackend.fundamentos-29.repl.co/"
-      );
-
-    //conversion de string a arreglo
-      const res = await data.json();
-
-    // permite q se guarde datos en el localStorage -solo acepta string
-      window.localStorage.setItem("Products", JSON.stringify(res));
-
-    //Devolvemos elarreglo
-      return res;
-   } catch (error) {
-    //devuelve error por consola en caso de encontrarlo
-      console.log("existe un problema de conexion con la API");
-   }
 }
 
-//* codigo accionador "arranca"para q espere nuestra promesa + guardar informacion en el localStorage
 
-async function main() {
-  const db = {
-      products:
-        JSON.parse(window.localStorage.getItem("products")) ||
-        (await getProducts()),
-      cart: JSON.parse(window.localStorage.getItem("cart")) || {},
-  };
+function filtrado(db){
+  const btnAll = document.querySelector(".all");
+  const btnShirt = document.querySelector(".shirt");
+  const btnHoddies = document.querySelector(".hoddies");
+  const btnSweater = document.querySelector(".sweater");
+  const productsHTML = document.querySelector(".products");
 
-    navlink();
-    pintarProducts(db);
-    mostrarCart();
-    insertarProductosAlCart(db);
-    validarDatosCart(db);
-    manejoDatosCart(db);
-    logicacompra(db);
-    infoDeCompra(db);
-    cantidaiconcarrito(db);
-    mixIupclon(db);
-    toggleDarkMode();
-    buttonSelected();
-    nav()
-    
-  
+      btnAll.addEventListener("click", function () {                     
+            pintarProducts(db);
+      });
+
+      btnShirt.addEventListener("click", function () {
+        const category = "shirt";
+        const productsByCategory = db.products.filter(
+            (product) => product.category === category);
+            
+            let html = "";
+
+            for (product of productsByCategory) {
+              html += `
+                  <div class="card element ${product.category.toLowerCase()}">
+                    <div class="card_top">
+                        <img class="img_producto" src="${product.image}" alt="imagen">
+                    </div>
+
+                    <div class="card_dawn">
+                        <span class='stock_product'> $${product.price}&nbsp;&nbsp;&nbsp;</span>
+                        <span> Stock: ${product.quantity}</span>
+                        <p class="description_product" data-description="${product.description}" data-image="${product.image}" data-price="${product.price}" data-stock="${product.quantity}" data-name="${product.name}" data-id="${product.id}">${product.name}</p>
+                        <div class="add">
+                          ${product.quantity ? `<i class='bx bx-plus plus' id='${product.id}'></i>` : '<p class="soldOut">sold out</p>'}
+                        </div>
+                    </div>
+                  </div>
+              `
+            }
+            productsHTML.innerHTML = html;
+            modal();
+      });
+
+      btnHoddies.addEventListener("click", function () {
+        const category = "hoddie";
+        const productsByCategory = db.products.filter(
+            (product) => product.category === category);
+            
+            let html = "";
+
+            for (product of productsByCategory) {
+              html += `
+                  <div class="card element ${product.category.toLowerCase()}">
+                    <div class="card_top">
+                        <img class="img_producto" src="${product.image}" alt="imagen">
+                    </div>
+
+                    <div class="card_dawn">
+                        <span class='stock_product'> $${product.price}&nbsp;&nbsp;&nbsp;</span>
+                        <span> Stock: ${product.quantity}</span>
+                        <p class="description_product" data-description="${product.description}" data-image="${product.image}" data-price="${product.price}" data-stock="${product.quantity}" data-name="${product.name}" data-id="${product.id}">${product.name}</p>
+                        <div class="add">
+                          ${product.quantity ? `<i class='bx bx-plus plus' id='${product.id}'></i>` : '<p class="soldOut">sold out</p>'}
+                        </div>
+                    </div>
+                  </div>
+              `
+            }
+            productsHTML.innerHTML = html;
+            modal();
+      });
+
+      
+      btnSweater.addEventListener("click", function () {
+        const category = "sweater";
+        const productsByCategory = db.products.filter(
+            (product) => product.category === category);
+            
+            let html = "";
+
+            for (product of productsByCategory) {
+              html += `
+                  <div class="card element ${product.category.toLowerCase()}">
+                    <div class="card_top">
+                        <img class="img_producto" src="${product.image}" alt="imagen">
+                    </div>
+
+                    <div class="card_dawn">
+                        <span class='stock_product'> $${product.price}&nbsp;&nbsp;&nbsp;</span>
+                        <span> Stock: ${product.quantity}</span>
+                        <p class="description_product" data-description="${product.description}" data-image="${product.image}" data-price="${product.price}" data-stock="${product.quantity}" data-name="${product.name}" data-id="${product.id}">${product.name}</p>
+                        <div class="add">
+                          ${product.quantity ? `<i class='bx bx-plus plus' id='${product.id}'></i>` : '<p class="soldOut">sold out</p>'}
+                        </div>
+                    </div>
+                  </div>
+              `
+            }
+            productsHTML.innerHTML = html;
+            modal();
+      });
+
+
+
+
+
+      
+      
 }
-
-main();
-
-
 
 function modal(){
 
-    // Agregar evento de clic a la descripción del producto
-  const descriptionProducts = document.querySelectorAll(".description_product");
-  descriptionProducts.forEach((descriptionProduct) => {
-    descriptionProduct.addEventListener("click", () => {
-        // Obtener los datos del producto del atributo "data-"
-        const description = descriptionProduct.getAttribute("data-description");        
-        const image = descriptionProduct.getAttribute("data-image");
-        const price = descriptionProduct.getAttribute("data-price");
-        const stock = descriptionProduct.getAttribute("data-stock");
-        const name = descriptionProduct.getAttribute("data-name");
+  // Agregar evento de clic a la descripción del producto
+const descriptionProducts = document.querySelectorAll(".description_product");
+      descriptionProducts.forEach((descriptionProduct) => {
+      descriptionProduct.addEventListener("click", () => {
+      // Obtener los datos del producto del atributo "data-"
+      const description = descriptionProduct.getAttribute("data-description");        
+      const image = descriptionProduct.getAttribute("data-image");
+      const price = descriptionProduct.getAttribute("data-price");
+      const stock = descriptionProduct.getAttribute("data-stock");
+      const name = descriptionProduct.getAttribute("data-name");
 
-      // Crear el contenido HTML para el modal
-        const modalHTML = `
-        <div class="modal-container">
-          <img class = "img_modal"src="${image}" alt="imagen">
-          <h1 class = "modal_name">${name}</h1>
-          <h2 class="modal_description">${description}</h2>
-          <p class="modal_precio">$${price}.00</p>
-          <p class="modal_stock">Stock: ${stock}</p>
-          <div class="add_modal">
-                ${product.quantity ? `<i class='bx bx-plus plus_modal' id = '${product.id}'></i>` : '<p class="soldOut">sold out</p>'}
-              </div>
-          </div>
-        `;
+    // Crear el contenido HTML para el modal
+      const modalHTML = `
+      <div class="modal-container">
+        <img class = "img_modal"src="${image}" alt="imagen">
+        <h1 class = "modal_name">${name}</h1>
+        <h2 class="modal_description">${description}</h2>
+        <p class="modal_precio">$${price}.00</p>
+        <p class="modal_stock">Stock: ${stock}</p>
+        
+              ${product.quantity ? `<i class='bx bx-plus plus_modal' id = '${product.id}'></i>` : '<p class="soldOut">sold out</p>'}
+            
+        </div>
+        <script>
 
-      // Mostrar un modal con la descripción del producto y su información
-        Swal.fire({            
-            html: modalHTML,
-            showCloseButton: false,
-            showConfirmButton: false
-        });
-    });
+        const plusModal = document.querySelector(".plus_modal");
+        alert(plusModal);
+
+        </script>
+      `;
+
+
+    // Mostrar un modal con la descripción del producto y su información
+      Swal.fire({            
+          html: modalHTML,
+          showCloseButton: false,
+          showConfirmButton: false,
+          
+      });
   });
+});
 }
-
 
 function pintarProducts(db) {
 
-  const productsHTML = document.querySelector(".products");
+const productsHTML = document.querySelector(".products");
 
-  let html = "";
+let html = "";
 
-  for (product of db.products) {
-    html += `
-        <div class="card element ${product.category.toLowerCase()}">
-          <div class="card_top">
-              <img class="img_producto" src="${product.image}" alt="imagen">
-          </div>
-
-          <div class="card_dawn">
-              <span class='stock_product'> $${product.price}&nbsp;&nbsp;&nbsp;</span>
-              <span> Stock: ${product.quantity}</span>
-              <p class="description_product" data-description="${product.description}" data-image="${product.image}" data-price="${product.price}" data-stock="${product.quantity}" data-name="${product.name}" data-id="${product.id}">${product.name}</p>
-              <div class="add">
-                ${product.quantity ? `<i class='bx bx-plus plus' id='${product.id}'></i>` : '<p class="soldOut">sold out</p>'}
-              </div>
-          </div>
+for (product of db.products) {
+  html += `
+      <div class="card element ${product.category.toLowerCase()}">
+        <div class="card_top">
+            <img class="img_producto" src="${product.image}" alt="imagen">
         </div>
-    `
-  }
 
-  productsHTML.innerHTML = html;
-  modal();
-  
-  
+        <div class="card_dawn">
+            <span class='stock_product'> $${product.price}&nbsp;&nbsp;&nbsp;</span>
+            <span> Stock: ${product.quantity}</span>
+            <p class="description_product" data-description="${product.description}" data-image="${product.image}" data-price="${product.price}" data-stock="${product.quantity}" data-name="${product.name}" data-id="${product.id}">${product.name}</p>
+            <div class="add">
+              ${product.quantity ? `<i class='bx bx-plus plus' id='${product.id}'></i>` : '<p class="soldOut">sold out</p>'}
+            </div>
+        </div>
+      </div>
+  `
 }
 
-
-function mixIupclon(db) {
-
-    function renderProducts(products){
-    let html = "";
-
-      for (product of products) {
-          html += ` 
-              <div class="card element" id="product-${product.id}">
-                <div class="card_top">
-                      <img class="img_producto" src="${product.image}" alt="imagen">
-                </div>
-                <div class="card_dawn">
-                  <span>$${product.price}&nbsp;&nbsp;&nbsp;</span>
-                  <span> Stock: ${product.quantity}</span><br>
-                  <p class="description_product" onclick="showProductModal(${product.id})">${product.name}</p>
-                  <div class = "add">${product.quantity? `<i class='bx bx-plus plus' id ='${product.id}' ></i>`: '<p class="soldOut">sold out</p>'}
-                </div>
-                </div>      
-              </div>
-          `;
-      }
-      const productsHTML = document.querySelector(".products");
-      productsHTML.innerHTML = html;
-
-    }
-
-  
-      const btnAll = document.querySelector(".all");
-      const btnShirt = document.querySelector(".shirt");
-      const btnHoddies = document.querySelector(".hoddies");
-      const btnSweater = document.querySelector(".sweater");
-
-          btnAll.addEventListener("click", function () {                     
-                pintarProducts(db);
-          });
-
-          btnShirt.addEventListener("click", function () {
-            const category = "shirt";
-            const productsByCategory = db.products.filter(
-                (product) => product.category === category);
-                renderProducts(productsByCategory);                
-          });
+productsHTML.innerHTML = html;
+modal();
 
 
-          btnHoddies.addEventListener("click", function () {
-            const category = "hoddie";
-            const productsByCategory = db.products.filter(
-                (product) => product.category === category);
-                renderProducts(productsByCategory);
-            });
-
-
-            btnSweater.addEventListener("click", function () {
-              const category = "sweater";
-              const productsByCategory = db.products.filter(
-                (product) => product.category === category);              
-                renderProducts(productsByCategory);
-               
-            });
-            
 }
-          
 
 function mostrarCart() {
    const cartIconHTML = document.querySelector(".cart_icon");
@@ -305,7 +336,6 @@ function mostrarCart() {
       cartHTML.classList.remove("cart_show");
    });
 }
-mostrarCart();
 
 function cerrarCart() {
   const cartHTML = document.querySelector(".cart");
@@ -356,7 +386,7 @@ function validarDatosCart(db) {
   const productHTML = document.querySelector(".products");
 
   productHTML.addEventListener("click", function (e) {
-    if (e.target.classList.contains("bx-plus")) {
+    if (e.target.classList.contains("bx-plus")) {   /*plus_modal*/
       const id = Number(e.target.id);
 
       const productFind = db.products.find((product) => product.id === id);
@@ -367,6 +397,7 @@ function validarDatosCart(db) {
             title: `Lo siento, solo disponemos de ${productFind.quantity} unidades.`,
             icon: "error",
             confirmButtonText: "Aceptar",
+
           });
         } else {          
           db.cart[productFind.id].amount++;        
@@ -380,6 +411,8 @@ function validarDatosCart(db) {
       infoDeCompra(db);
     }
   })
+
+  
 }
 
 
@@ -413,6 +446,7 @@ function manejoDatosCart(db) {
           showCancelButton: true,
           confirmButtonText: "Eliminar",
           cancelButtonText: "Cancelar",
+          
         }).then((result) => {
           if (result.isConfirmed) {
             delete db.cart[id];
@@ -434,6 +468,7 @@ function manejoDatosCart(db) {
         showCancelButton: true,
         confirmButtonText: "Eliminar",
         cancelButtonText: "Cancelar",
+        
       }).then((result) => {
         if (result.isConfirmed) {
           delete db.cart[id];
@@ -445,8 +480,6 @@ function manejoDatosCart(db) {
   });
 }
 
-
-
 function logicacompra(db) {
   const btnBuy = document.querySelector(".btn_comprar");
   btnBuy.addEventListener("click", function () {
@@ -455,6 +488,7 @@ function logicacompra(db) {
         title: "¡El carrito está vacío!",
         icon: "error",
         confirmButtonText: "Aceptar",
+        
       });
       return;
     }
@@ -467,6 +501,7 @@ function logicacompra(db) {
       cancelButtonColor: "#d33",
       confirmButtonText: "Sí, comprar",
       cancelButtonText: "Cancelar",
+      
     }).then((result) => {
       if (result.isConfirmed) {
         const actInventario = [];
@@ -495,6 +530,7 @@ function logicacompra(db) {
             title: "¡Gracias por su compra!",
             icon: "success",
             confirmButtonText: "Aceptar",
+            
           }).then(() => {
             pintarProducts(db);
             insertarProductosAlCart(db);
@@ -504,6 +540,7 @@ function logicacompra(db) {
             title: "¡No hay productos en el carrito que se puedan comprar!",
             icon: "error",
             confirmButtonText: "Aceptar",
+            
           });
         }
       }
@@ -540,3 +577,63 @@ function cantidaiconcarrito(db) {
 
   cantidaddeProductos.textContent = cantidad;
 }
+
+
+async function getProducts() {
+  try {
+    //asignamos a variable la peticion a la API
+      const data = await fetch(
+      "https://ecommercebackend.fundamentos-29.repl.co/"
+      );
+
+    //conversion de string a arreglo
+      const res = await data.json();
+
+    // permite q se guarde datos en el localStorage -solo acepta string
+      window.localStorage.setItem("Products", JSON.stringify(res));
+
+    //Devolvemos elarreglo
+      return res;
+  } catch (error) {
+    //devuelve error por consola en caso de encontrarlo
+      console.log("existe un problema de conexion con la API");
+  }
+}
+
+async function main() {
+  const db = {
+      products:
+        JSON.parse(window.localStorage.getItem("products")) ||
+        (await getProducts()),
+      cart: JSON.parse(window.localStorage.getItem("cart")) || {},
+  };
+
+    navlink();    
+    mostrarCart();
+    insertarProductosAlCart(db);
+    validarDatosCart(db);
+    manejoDatosCart(db);
+    logicacompra(db);
+    infoDeCompra(db);
+    cantidaiconcarrito(db);    
+    toggleDarkMode();
+    buttonSelected();
+    nav();    
+    pintarProducts(db);    
+    opening();
+    filtrado(db);
+    nav();
+    colorEnlaces();
+    linksMenu();
+    mostrarCart();
+    loading();
+    
+}
+main();
+
+
+
+
+
+
+
