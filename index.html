@@ -4,139 +4,176 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academlo</title>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/style_test.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
-    
-
-    <title>Academnlo Store</title>
 </head>
-<body class="">
-    <main>
-      <div class="container">
-        <div class="top" id="top"></div>
-        <div class="nav" id="nav">
-          <div class="nav_header">
-
-            <div class="nav_left">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48.92 56.48" class="nav_logo-icon" style="width: 35px;">
-                <title>Academlo Logo</title>
-                <g><g><path d="M28.58,15.39H25.16L35.78,36H31.49L20.67,15.71,8.23,38.82H18.94l3-5.43h-3.4l-1.47,2.54h-4l2.69-5.09H25.85l4.28,8H40.67ZM17.23,28.21l3.57-6.6,3.57,6.6Z"></path></g></g>
-              </svg>
-              
-              <span class="name_startup">STORE</span>
-              <ul class="menu" id="menu">
-                <li>
-                  <a  class="link_menu" href="#top">Home</a>
-                </li>
-                <li>
-                  <a class="link_menu" href="#button">Products</a>                  
-                </li>
-              </ul>
-
-            </div>
+<body>
+    
+    <div class="top" id="arriba"></div> <!--Enlace disponible a top menu hamburguesa-->
+    <div class="nav-cont">
+        <div class="nav_efect"></div>
+    </div>
+    <div class="container">
+     
+        
+        <header><!-- Encabezado-->
             
-            <div class="nav_right">
-              <i class='bx bx-moon moon_icon'></i>
-              <i class='bx bx-cart-alt cart_icon'>
-                <span class="cantidad_de_productos">0</span>
-              </i>
-              <i class='bx bx-menu menu_hamburguesa' ></i>      
+            <nav class="nav"><!--Nav-->
+                <div class="nav_left">
+                    <svg class = "logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48.92 56.48" class="nav_logo-icon" style="width: 35px;"><g><g><path d="M28.58,15.39H25.16L35.78,36H31.49L20.67,15.71,8.23,38.82H18.94l3-5.43h-3.4l-1.47,2.54h-4l2.69-5.09H25.85l4.28,8H40.67ZM17.23,28.21l3.57-6.6,3.57,6.6Z"></path></g></g></svg>                                        
+                    <span class="name_startup">STORE</span>
+
+                    <ul class="menu_izquierdo">
+                        <li>
+                            <a  class="link_menu color-enlace mi" href="#arriba">Home</a>
+                        </li>
+                        <li>
+                            <a class="link_menu color-enlace mi" href="#button">Products</a>                  
+                        </li>
+                    </ul>
+
+                </div>
+
+                <div class="nav_right">
+                    <i class='bx bx-moon moon_icon'></i>
+                    <i class='bx bx-cart-alt cart_icon'></i>
+                    <i class="cantidad_de_productos">0</i>                    
+                    <i class='bx bx-menu menu_hamburguesa'></i>
+                    
+                </div>                
+            </nav>
+
+            <!-- Menu hamburguesa -- tiene q estar libre del nav sino afecta su posicion--->
+            <ul class="menu">
+                <li>
+                    <a  class="link_menu color-enlace" href="#top">Home</a>
+                </li>
+                <li>
+                    <a class="link_menu color-enlace" href="#button">Products</a>                  
+                </li>
+            </ul>
+            <!-- Fin Menu hamburguesa -->
+
+            <!-- Menu Cart -- tiene q estar libre del nav sino afecta su posicion-->
+            <div class="cart">
+                <i class='bx bx-x cart_cerrar'></i>
+                <div class="card_products"></div>
+                <div class="card_total">
+                    <div class="total_info">
+                        <p class="info_cantidad">Items</p>
+                        <p class="info_total">$</p>
+                    </div>
+                    <button class="btn btn_comprar">Comprar</button>
+                </div>
             </div>
-          </div>
+            <!-- Fin Menu Cart --> 
+        </header>
 
-          <div class="cart">
-            <i class='bx bx-x cart_cerrar'></i>
-            <div class="card_products"></div>
-            <div class="card_total">
-              <div class="total_info">
-                <span class="info_cantidad"></span><span class="info_total"></span>
-              </div>
-                <button class="btn btn_comprar">Comprar</button>
-
+        <main>        
+            <div class="contenido">
+                <div class="banda">
+                    <img class="buzo" src="./img/sweater2.png" alt="">
+                </div>
+                <section class="section_2">
+                    <h1>New Sweatshirt COLLECTIONS 2022</br></h1>
+                    <h3>Latest arrival of the new Hanes Midweight Crewneck sweatshirt imported from the 2022 series, with a modern design.</h3>
+                    <p>$14.00</p>
+                    <button class="button_show_more">Show More</button>
+                </section>
             </div>
-          </div> 
-          
-        </div>          
 
-        <div class="banda"></div>
-        <img class="buzo" src="./img/sweater2.png" alt="">
+            <section class="button_filters" id ="button">
+                <div class="button_up">
+                    <button class="button_category all" data-filter='all'>
+                        <span class="title_button">Show all<br></span>
+                        <span class="title_details">show all products</span>
+                    </button>
+                    <button class="button_category shirt" data-filter='shirt'>
+                        <span class="title_button">Shirt<br></span>
+                        <span class="title_details">7 products</span>
+                    </button>
+                </div>
+                <div class="button_down">
+                    <button class="button_category hoddies" data-filter='hoddies'>
+                        <span class="title_button">Hoddies<br></span>
+                        <span class="title_details">6 products</span>
+                    </button>
+                    <button class="button_category sweater" data-filter='sweater'>
+                        <span class="title_button">Sweater<br></span>
+                        <span class="title_details">5 products</span>
+                    </button>
+                </div>
+            </section>
+            
+            <section class="products" id="products-container">
+            </section>
 
-        <section class="section_2">
-          <h1>New Sweatshirt COLLECTIONS 2022</br></h1>
-          <h3>Latest arrival of the new Hanes Midweight Crewneck sweatshirt imported from the 2022 series, with a modern design.</h3>
-          <span>$14.00</span>
-          <button class="button_show_more">Show More</button>
-        </section>
+        </main>
 
-        <section class="button filters" id="button">
-          <div class="button_up">
-            <button class="button_category all" data-filter = 'all'>
-              <span class=" title_button">Show all<br></span>
-              <span class = "title_details">show all products</span>
-            </button>
-            <button class=" button_category shirt" data-filter = 'shirt'>
-              <span class=" title_button">Shirt<br></span>
-              <span class = "title_details">7 products</span>
-            </button>            
-          </div>
-          <div class="button_down">
-            <button class = "button_category hoddies" data-filter = 'hoddies'>
-              <span class = "title_button">Hoddies<br></span>
-              <span class = "title_details">6 products</span>
-            </button>
-            <button class = "button_category sweater" data-filter = 'sweater'>
-              <span class = "title_button">Sweater<br></span>
-              <span class = "title_details">5 products</span>
-            </button>            
-          </div>
-        </section>
 
-        <section class="products" id="products">
-          <div class="contenedor_productos"></div>
-        </section>
-      </div>
-    </main>
-    <footer>
-      <div class="contenedor_footer">
-        <div class="secciones_footer">
-        <section>
-          <span class = "title_footer">Our information</span>
-          <a href="#top"><p class="link_footer">Toluca - Mexico</p></a>
-        </section>
+        
+        <div class="load" id="load">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48.92 56.48" class="load__gif">
+                <title>Academlo Logo</title>
+                <g>
+                    <g>
+                        <path
+                            d="M24.45,56.48,0,42.36V14.12L24.46,0,48.92,14.12V42.36ZM1.89,41.26l22.56,13L47,41.26v-26l-22.56-13-22.56,13Z">
+                        </path>
+                        <path
+                            d="M28.58,15.39H25.16L35.78,36H31.49L20.67,15.71,8.23,38.82H18.94l3-5.43h-3.4l-1.47,2.54h-4l2.69-5.09H25.85l4.28,8H40.67ZM17.23,28.21l3.57-6.6,3.57,6.6Z">
+                        </path>
+                    </g>
+                </g>
+            </svg>
+        </div>
 
-        <section>
-          <span class = "title_footer">About Us</span>
-          <a href="#top"><p class="link_footer">Support Center</p></a>
-          <a href="#top"><p class="link_footer">Customer Support</p></a>
-          <a href="#top"><p class="link_footer">About Us</p></a>
-          <a href="#top"><p class="link_footer">Copy Right</p></a>
-        </section>
 
-        <section>
-          <span class = "title_footer">Products</span>
-          <a href="#top"><p class="link_footer">Hoddies</p></a>
-          <a href="#top"><p class="link_footer">Shirt</p></a>
-          <a href="#top"><p class="link_footer">About Us</p></a>
-          <a href="#top"><p class="link_footer">Sweatshirt</p></a>
-        </section>
-
-        <section class = "redes_sociales">          
-            <span class = "title_footer">Social</span>          
-          <div class="icon_redes">
-            <a href="#top"><i class='bx bxl-facebook-square icon_redes'></i></a>
-            <a href="#top"><i class='bx bxl-twitter icon_redes' ></i></a>
-            <a href="#top"><i class='bx bxl-instagram icon_redes' ></i></a>
-          </div>
-        </section>    
-      </div>
-      <section class="datos_personales">
-        <h6 class="datos_personales_h6">Sergio Gabriel Olivo Orellana, olivosergio09@gmail.com, https://github.com/HitsoKeyco/ecommerce</h6>
-      </section>                
-      </div>
-
-      <script src="./js/main.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/mixitup/3.3.0/mixitup.min.js" integrity="sha512-vNxzM1ciPhd7UnKdgrAWNJ/JAdxaPPfmFen8WXcjZ2X99lptf001o+KB3OE1M0b8UsISc2kvLCI3M9ND4BcmnA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>      
-    </footer>
+    </div><!-- cierre container -->
 </body>
+<footer>
+    <div class="contenedor_footer">
+            <div class="secciones_footer">
+                <section class="product_footer">
+                    <span class = "title_footer">Our information</span>
+                    <a href="#top"><p class="link_footer">Toluca - Mexico</p></a>
+                </section>
+
+                <section class="product_footer">
+                    <span class = "title_footer">About Us</span>
+                    <a href="#top"><p class="link_footer">Support Center</p></a>
+                    <a href="#top"><p class="link_footer">Customer Support</p></a>
+                    <a href="#top"><p class="link_footer">About Us</p></a>
+                    <a href="#top"><p class="link_footer">Copy Right</p></a>
+                </section>
+
+                <section class="product_footer">
+                    <span class = "title_footer">Products</span>
+                    <a href="#top"><p class="link_footer">Hoddies</p></a>
+                    <a href="#top"><p class="link_footer">Shirt</p></a>
+                    <a href="#top"><p class="link_footer">About Us</p></a>
+                    <a href="#top"><p class="link_footer">Sweatshirt</p></a>
+                </section>
+
+                <section class = "redes_sociales" >          
+                    <span class = "title_footer">Social</span>          
+                    <div class="icon_redes" style="text-align: left;">
+                        <a href="#top"><i class='bx bxl-facebook-square icon_redes'></i></a>
+                        <a href="#top"><i class='bx bxl-twitter icon_redes' ></i></a>
+                        <a href="#top"><i class='bx bxl-instagram icon_redes' ></i></a>
+                    </div>
+                </section>
+
+            </div>
+
+                <section class="datos_personales">
+                    <h6 class="datos_personales_h6">Sergio Gabriel Olivo Orellana, olivosergio09@gmail.com, https://github.com/HitsoKeyco/ecommerce</h6>
+                </section>                
+        </div> -->
+    <script src="./js/main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mixitup/3.3.0/mixitup.min.js" integrity="sha512-vNxzM1ciPhd7UnKdgrAWNJ/JAdxaPPfmFen8WXcjZ2X99lptf001o+KB3OE1M0b8UsISc2kvLCI3M9ND4BcmnA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</footer>
 </html>
