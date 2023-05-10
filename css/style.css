@@ -122,7 +122,7 @@ body {
     display: flex;
     width: 100%;    
     align-items: center;
-    z-index: 9999;
+    z-index: 2;
 
 }
 
@@ -167,8 +167,7 @@ body {
     margin-right: 0;
     padding-right: 20px;
 
-    position: relative;
-    
+    position: relative;    
 }
 
 ul { /* Lista menu de opciones del nav */
@@ -253,6 +252,7 @@ a.active {
     font-size: 1.5em;
     color: var(--textnavcolor);
     cursor: pointer;
+    
 }
 
 .cart_icon { /* asignando estilos al carrito de compras */
@@ -291,13 +291,13 @@ a.active {
     right: -100vw;
     width: 100vw;
     height: 100vh;
-    z-index: 9999;
+    z-index: 3;
     color: var(--textnavcolor);
     background-color: var(--white);   
     
     display: flex;
     flex-direction: column;
-   
+
     transition: 0.3s ease-in-out;
 
     box-shadow: var(--shadow-general);
@@ -735,9 +735,9 @@ a.active {
     cursor: pointer;
 }
 
-.add_modal:hover{
+.add_modal:active{
     background-color: var(--bandcolor);
-    transition: 0.5s;
+    
 }
 
 .modal_stock{
@@ -767,11 +767,19 @@ a.active {
 
 }
 
-.plus_modal:hover{
+.plus_modal:active:hover{
     color: var(--white);
     background-color: var(--bandcolor);
-    transition: 0.5s
+    
 }
+
+.swal2-popup{
+    position: relative;
+    z-index: 100;
+    background-color: var(--navcolor);
+    color: var(--text-color-litle)
+}
+
 
 .contenedor_footer{
     

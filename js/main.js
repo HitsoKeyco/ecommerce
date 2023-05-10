@@ -307,6 +307,13 @@ function mostrarCart() {
 }
 mostrarCart();
 
+function cerrarCart() {
+  const cartHTML = document.querySelector(".cart");
+
+  hiddenCartHTML.addEventListener("click", function () {
+    cartHTML.classList.remove("cart_show");
+  });
+}
 
 function insertarProductosAlCart(db) {
   const cardProducts = document.querySelector(".card_products");
@@ -355,19 +362,26 @@ function validarDatosCart(db) {
       const productFind = db.products.find((product) => product.id === id);
 
       if (db.cart[productFind.id]) {
-        if (productFind.quantity === db.cart[productFind.id].amount)
-          return alert("No disponemos de mas en bodega");
-        db.cart[productFind.id].amount++;
-      } else {
-        db.cart[productFind.id] = { ...productFind, amount: 1 };
+        if (productFind.quantity === db.cart[productFind.id].amount) {
+          Swal.fire({
+            title: `Lo siento, solo disponemos de ${productFind.quantity} unidades.`,
+            icon: "error",
+            confirmButtonText: "Aceptar",
+          });
+        } else {          
+          db.cart[productFind.id].amount++;        
+        }
+      } else {          
+        db.cart[productFind.id] = { ...productFind, amount: 1 }; 
       }
 
       window.localStorage.setItem("cart", JSON.stringify(db.cart));
       insertarProductosAlCart(db);
       infoDeCompra(db);
     }
-  });
+  })
 }
+
 
 function manejoDatosCart(db) {
   const cartProducts = document.querySelector(".card_products");
@@ -377,71 +391,126 @@ function manejoDatosCart(db) {
       const id = Number(e.target.parentElement.id);
       const productFind = db.products.find((product) => product.id === id);
 
-      if (productFind.quantity === db.cart[productFind.id].amount)
-        return alert("no tenemos mas en bodega");
-
-      db.cart[id].amount++;
+      if (productFind.quantity === db.cart[productFind.id].amount) {
+        // Mostrar un modal de confirmación utilizando Sweet Alert
+        Swal.fire({
+          title: `Lo siento, solo disponemos de ${productFind.quantity} unidades.`,
+          icon: "error",
+          confirmButtonText: "Aceptar",
+        });
+      } else {
+        db.cart[id].amount++;
+        window.localStorage.setItem("cart", JSON.stringify(db.cart));
+        insertarProductosAlCart(db);
+      }
     }
     if (e.target.classList.contains("bx-minus")) {
       const id = Number(e.target.parentElement.id);
       if (db.cart[id].amount === 1) {
-        const response = confirm(
-          "¿estas seguro de que quieres eliminar este producto?"
-        );
-        if (!response) return;
-        delete db.cart[id];
+        // Mostrar un modal de confirmación utilizando Sweet Alert
+        Swal.fire({
+          title: "¿Estás seguro de que quieres eliminar este producto?",
+          showCancelButton: true,
+          confirmButtonText: "Eliminar",
+          cancelButtonText: "Cancelar",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            delete db.cart[id];
+            window.localStorage.setItem("cart", JSON.stringify(db.cart));
+            insertarProductosAlCart(db);            
+          }
+        });
       } else {
         db.cart[id].amount--;
+        window.localStorage.setItem("cart", JSON.stringify(db.cart));
+        insertarProductosAlCart(db);
       }
     }
     if (e.target.classList.contains("bxs-trash")) {
       const id = Number(e.target.parentElement.id);
-      const response = confirm(
-        "¿estas seguro de que quieres eliminar este producto?"
-      );
-      if (!response) return;
-      delete db.cart[id];
+      // Mostrar un modal de confirmación utilizando Sweet Alert
+      Swal.fire({
+        title: "¿Estás seguro de que quieres eliminar este producto?",
+        showCancelButton: true,
+        confirmButtonText: "Eliminar",
+        cancelButtonText: "Cancelar",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          delete db.cart[id];
+          window.localStorage.setItem("cart", JSON.stringify(db.cart));
+          insertarProductosAlCart(db);
+        }
+      });
     }
-
-    window.localStorage.setItem("cart", JSON.stringify(db.cart));
-    insertarProductosAlCart(db);
   });
 }
+
+
 
 function logicacompra(db) {
   const btnBuy = document.querySelector(".btn_comprar");
   btnBuy.addEventListener("click", function () {
-    if (!Object.values(db.cart).length)
-      return alert("No lleva productos en el carrito");
-    const response = confirm("seguro que quieres comprar");
-    if (!response) return;
-
-    const actInventario = [];
-    for (const product of db.products) {
-      const productCart = db.cart[product.id];
-      if (product.id === productCart?.id) {
-        actInventario.push({
-          ...product,
-          quantity: product.quantity - productCart.amount,
-        });
-        const agradecimiento = confirm(
-          "su compra ha sido generada con exito!!"
-        );
-      } else {
-        actInventario.push(product);
-      }
+    if (!Object.values(db.cart).length) {
+      Swal.fire({
+        title: "¡El carrito está vacío!",
+        icon: "error",
+        confirmButtonText: "Aceptar",
+      });
+      return;
     }
 
-    db.products = actInventario;
-    db.cart = {};
+    Swal.fire({
+      title: "¿Está seguro que desea comprar?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Sí, comprar",
+      cancelButtonText: "Cancelar",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const actInventario = [];
+        let compraGenerada = false;
+        for (const product of db.products) {
+          const productCart = db.cart[product.id];
+          if (product.id === productCart?.id) {
+            actInventario.push({
+              ...product,
+              quantity: product.quantity - productCart.amount,
+            });
+            compraGenerada = true;
+          } else {
+            actInventario.push(product);
+          }
+        }
 
-    window.localStorage.setItem("products", JSON.stringify(db.products));
-    window.localStorage.setItem("cart", JSON.stringify(db.cart));
+        if (compraGenerada) {
+          db.products = actInventario;
+          db.cart = {};
 
-    pintarProducts(db);
-    insertarProductosAlCart(db);
+          window.localStorage.setItem("products", JSON.stringify(db.products));
+          window.localStorage.setItem("cart", JSON.stringify(db.cart));
+
+          Swal.fire({
+            title: "¡Gracias por su compra!",
+            icon: "success",
+            confirmButtonText: "Aceptar",
+          }).then(() => {
+            pintarProducts(db);
+            insertarProductosAlCart(db);
+          });
+        } else {
+          Swal.fire({
+            title: "¡No hay productos en el carrito que se puedan comprar!",
+            icon: "error",
+            confirmButtonText: "Aceptar",
+          });
+        }
+      }
+    });
   });
 }
+
 
 function infoDeCompra(db) {
   const infoTotal = document.querySelector(".info_total");
