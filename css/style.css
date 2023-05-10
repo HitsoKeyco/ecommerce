@@ -356,8 +356,6 @@ a.active {
     
 }
 
-
-
 .img_cart_in{
     width: 100%;
 }
@@ -778,6 +776,24 @@ a.active {
     z-index: 100;
     background-color: var(--navcolor);
     color: var(--text-color-litle)
+}
+
+.soldOut{
+    position: absolute;
+    top: 25px;
+    right: 130px;
+    width: 70px;
+    height: 20px;
+    background-color: var(--bandcolor);
+    font-size: 1em;
+    
+    border-radius: 5px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
 }
 
 
