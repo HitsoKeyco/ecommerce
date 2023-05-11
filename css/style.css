@@ -596,17 +596,24 @@ a.active {
     border-radius: 20px;
     max-width: 280px;
     width: fit-content;
+
+    
     
 
     
 }
 
 .card_top{
-    padding: 10px;
+    padding-top: 30px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-bottom: 15px;
     height: 70%;
     display: flex;
     justify-content: center;
     align-items: center;
+
+    
 
 }
 
@@ -646,8 +653,13 @@ a.active {
 
 .img_producto {
     max-width: 100%;
+    transition: transform 0.3s ease-in-out;
 }
 
+
+.img_producto:hover {
+    transform: translateY(-10px);
+}
 .plus{
     cursor: pointer;
     position: absolute;
@@ -681,12 +693,6 @@ a.active {
     border: none;
     
 }
-
-
-
-/* swal2-popup swal2-modal swal2-show */
-
-
 
 .swal-modal {
     box-shadow: none;

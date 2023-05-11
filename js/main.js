@@ -375,11 +375,24 @@ function validarDatosCart(db) {
             confirmButtonText: "Aceptar",
 
           });
-        } else {          
-          db.cart[productFind.id].amount++;        
+        } else {
+          Swal.fire({
+            icon: "success",
+            text: "Producto agregado al carrito",
+            timer: 1000,
+            timerProgressBar: true,
+          });              
+          db.cart[productFind.id].amount++;
+          
         }
       } else {          
         db.cart[productFind.id] = { ...productFind, amount: 1 }; 
+        Swal.fire({
+          icon: "success",
+          text: "Producto agregado al carrito",
+          timer: 1000,
+          timerProgressBar: true,
+        });    
       }
 
       window.localStorage.setItem("cart", JSON.stringify(db.cart));
@@ -607,7 +620,6 @@ async function main() {
     
 }
 main();
-
 
 
 
