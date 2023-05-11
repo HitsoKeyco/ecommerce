@@ -25,8 +25,8 @@ function loading() {
       miLoad.classList.add('miLoadocultar');
       miLoadGif.classList.add('miLoadocultar');
       shadows.classList.add('miLoadocultar');
-      document.body.style.overflow = 'hidden';
-    }, 3000);
+      
+    }, 2000);
   });
 }
 

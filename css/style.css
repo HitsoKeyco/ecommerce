@@ -67,7 +67,7 @@ body {
 
 }
 
-.load__gif{
+.load__gif {
     width: 150px;
     height: 150px;
     animation: mover 1s ease-in-out infinite alternate;    
