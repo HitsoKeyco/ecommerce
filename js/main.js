@@ -602,6 +602,7 @@ async function main() {
     colorEnlaces();
     linksMenu();
     mostrarCart();
+    loading();
     
     
 }
