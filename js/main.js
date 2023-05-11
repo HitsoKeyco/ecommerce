@@ -15,47 +15,23 @@ function linksMenu(){
         });
 }
 
-function loading(){
-  window.addEventListener('load', function() {
+function loading() {
+  const miLoad = document.querySelector('.load');
+  const miLoadGif = document.querySelector('.load__gif');
+  const shadows = document.querySelector('.shadows');
 
-    const miLoad = document.querySelector('.load');
-    
-    setTimeout(function() {
-      miLoad.classList.add('miLoadocultar');
-      
-  
-    }, 4000); 
-  });
-  
-  
   window.addEventListener('load', function() {
-  
-    const miLoad = document.querySelector('.load__gif');
-    
     setTimeout(function() {
       miLoad.classList.add('miLoadocultar');
-      
-  
-    }, 3000); 
+      miLoadGif.classList.add('miLoadocultar');
+      shadows.classList.add('miLoadocultar');
+      document.body.style.overflow = 'hidden';
+    }, 3000);
   });
-  
-  
-  
-  window.addEventListener('load', function() {
-  
-    const miLoad = document.querySelector('.shadows');
-    
-    setTimeout(function() {
-      miLoad.classList.add('miLoadocultar');
-      
-  
-    }, 3000); 
-  });
-  
-  
 }
 
-
+loading();
+  
 function navlink() {
   const links = document.querySelectorAll(".link_menu");
 
@@ -626,7 +602,7 @@ async function main() {
     colorEnlaces();
     linksMenu();
     mostrarCart();
-    loading();
+    
     
 }
 main();

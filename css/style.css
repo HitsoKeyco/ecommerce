@@ -2,25 +2,24 @@
 *{
     padding: 0;
     margin: 0 auto;    
-    box-sizing: border-box;
-    
+    box-sizing: border-box;    
     font-family: 'Roboto', sans-serif;
     font-size: 1rem;
 }
 
-::-webkit-scrollbar {
+    ::-webkit-scrollbar {
     width: 10px; /* Ancho del scrollbar */
-  }
-  
-  ::-webkit-scrollbar-track {
+    }
+
+    ::-webkit-scrollbar-track {
     background: #f1f1f1; /* Color de fondo del track */
-  }
-  
-  ::-webkit-scrollbar-thumb {
+    }
+
+    ::-webkit-scrollbar-thumb {
     background: var(--bandcolor); /* Color del thumb */
     border-radius: 5px; /* Borde redondeado del thumb */
-  }
-  
+    }
+
 
 
 
@@ -43,43 +42,6 @@
         --container-color: hsl(0%, 0%, 100%);
 }
 
-.dark_mode {
-
-    --textnavcolor:  white;
-    --textnavseleccion: hsl(182, 53%, 74%);
-    --navcolor:  hsl(246, 16%, 12%);    
-    --bandcolor:  hsl(182, 53%, 74%);        
-    --button-color:hsl(246, 16%, 12%);
-    --body-color: hsl(249, 19%, 14%);    
-    --white: rgb(0, 0, 0);
-    --black:  white ;
-    --card-color: hsla(246, 16%, 5%);
-    --pluscolor:  hsl(182, 53%, 74%);
-    transition: 0.5s all;
-    
-    
-
-}
-
-.light_mode{
-    --body-color: hsl(206, 4%, 97%);    
-    --textnavcolor: hsl(0, 0%, 17%);
-    --textcolorwhiteglobal: white;
-    --navcolor:  white;
-    --white: white;
-    --black:  rgb(0, 0, 0);
-    --bandcolor: hsl(354, 78%, 60%);
-    --textnavseleccion: hsl(354, 78%, 60%);        
-    --button-color: hsl(0, 0%, 17%);
-    --shadow-general: 0 .5rem 1rem rgba(0, 0, 0, .15);
-    --backgroundbuttoncolor:     ;    
-    --text-color-litle: hsl(0, 0%, 55%);
-    --card-color: hsl(0, 0%, 90%);
-    --text-color-light: hsl(0, 0%, 55%);
-    --pluscolor: hsl(354, 78%, 60%);        
-    --container-color: hsl(0%, 0%, 100%);
-    transition: 0.5s all;
-}
 
 
 
@@ -803,7 +765,7 @@ a.active {
 .swal2-popup{ /* modal*/
     position: relative;
     z-index: 100;
-    background-color: var(--navcolor);
+    background-color: var(--card-color);
     color: var(--text-color-litle);
     
 }
@@ -1087,4 +1049,42 @@ a.active {
         margin: 0 auto;
     }
 
+}
+
+.dark_mode {
+
+    --textnavcolor:  white;
+    --textnavseleccion: hsl(182, 53%, 74%);
+    --navcolor:  hsl(246, 16%, 12%);    
+    --bandcolor:  hsl(182, 53%, 74%);        
+    --button-color:hsl(246, 16%, 12%);
+    --body-color: hsl(249, 19%, 14%);    
+    --white: rgb(0, 0, 0);
+    --black:  white ;
+    --card-color: hsla(246, 16%, 5%);
+    --pluscolor:  hsl(182, 53%, 74%);
+    transition: 0.5s all;
+    
+    
+
+}
+
+.light_mode{
+    --body-color: hsl(206, 4%, 97%);    
+    --textnavcolor: hsl(0, 0%, 17%);
+    --textcolorwhiteglobal: white;
+    --navcolor:  white;
+    --white: white;
+    --black:  rgb(0, 0, 0);
+    --bandcolor: hsl(354, 78%, 60%);
+    --textnavseleccion: hsl(354, 78%, 60%);        
+    --button-color: hsl(0, 0%, 17%);
+    --shadow-general: 0 .5rem 1rem rgba(0, 0, 0, .15);
+    --backgroundbuttoncolor:     ;    
+    --text-color-litle: hsl(0, 0%, 55%);
+    --card-color: hsl(0, 0%, 90%);
+    --text-color-light: hsl(0, 0%, 55%);
+    --pluscolor: hsl(354, 78%, 60%);        
+    --container-color: hsl(0%, 0%, 100%);
+    transition: 0.5s all;
 }
