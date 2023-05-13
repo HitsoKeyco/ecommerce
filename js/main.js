@@ -4,6 +4,26 @@
 // -----------------Funciones--------------------------- //
 
 
+// scroll suave
+{
+// Seleccione todos los enlaces de anclaje en la página
+$('a[href*="#"]')
+  // Agregue un evento de clic para interceptar el clic del enlace de anclaje
+  .click(function(event) {
+    // Prevenir el comportamiento predeterminado del navegador
+    event.preventDefault();
+
+    // Obtener el identificador del elemento de destino del enlace de anclaje
+    var target = $(this.hash);
+
+    // Desplazarse suavemente al elemento de destino utilizando jQuery ScrollTo
+    $('html, body').animate({
+      scrollTop: target.offset().top
+    }, 1000);
+  });
+}
+
+
 function linksMenu(){
   const links = document.querySelectorAll(".menu li");
   const boxMenu = document.querySelector(".menu_hamburguesa");
@@ -29,7 +49,6 @@ function loading() {
     }, 2000);
   });
 }
-
 loading();
   
 function navlink() {
@@ -53,9 +72,10 @@ function mostrarMenu() {
 
 function colorEnlaces(){
   var enlaces = document.getElementsByClassName("color-enlace");
+   
   for (var i = 0; i < enlaces.length; i++) {
     enlaces[i].addEventListener("click", function(event) {
-        event.preventDefault(); /* Prevenir el comportamiento predeterminado del enlace */
+        
         for (var j = 0; j < enlaces.length; j++) {
           enlaces[j].classList.remove("active"); /* Eliminar la clase "active" de todos los enlaces */
         }
@@ -64,6 +84,22 @@ function colorEnlaces(){
         this.blur(); /* Remover el enfoque del enlace */
     });
 }
+
+}
+
+{
+const buttonFilters = document.querySelectorAll('.button_category');
+
+buttonFilters.forEach(button => {
+  button.addEventListener('click', () => {
+    // Remover la clase "defect" de todos los botones
+    buttonFilters.forEach(button => {
+      button.classList.remove('defect');
+    });
+    // Agregar la clase "defect" al botón clickeado
+    button.classList.add('defect');
+  });
+});
 
 }
 
@@ -101,19 +137,24 @@ function toggleDarkMode() {
   const body = document.body;
   const moonIcon = document.querySelector(".moon_icon");
 
-  let isDarkMode = false;
+  // Leer la preferencia del usuario del almacenamiento local
+  let isDarkMode = localStorage.getItem("isDarkMode") === "true";
+
+  // Aplicar el modo oscuro según la preferencia del usuario
+  body.classList.toggle("dark_mode", isDarkMode);
+  body.classList.toggle("light_mode", !isDarkMode);
 
   moonIcon.addEventListener("click", () => {
     isDarkMode = !isDarkMode;
+
+    // Guardar la preferencia del usuario en el almacenamiento local
+    localStorage.setItem("isDarkMode", isDarkMode);
+
+    // Aplicar el modo oscuro según la preferencia del usuario
     body.classList.toggle("dark_mode", isDarkMode);
     body.classList.toggle("light_mode", !isDarkMode);
   });
 }
-
-function opening(){
-
-}
-
 
 function filtrado(db){
   const btnAll = document.querySelector(".all");
@@ -213,59 +254,65 @@ function filtrado(db){
             productsHTML.innerHTML = html;
             modal();
       });
-
-
-
-
-
-      
       
 }
 
 function modal(){
 
-  // Agregar evento de clic a la descripción del producto
-const descriptionProducts = document.querySelectorAll(".description_product");
-      descriptionProducts.forEach((descriptionProduct) => {
-      descriptionProduct.addEventListener("click", () => {
-      // Obtener los datos del producto del atributo "data-"
-      const description = descriptionProduct.getAttribute("data-description");        
-      const image = descriptionProduct.getAttribute("data-image");
-      const price = descriptionProduct.getAttribute("data-price");
-      const stock = descriptionProduct.getAttribute("data-stock");
-      const name = descriptionProduct.getAttribute("data-name");
-
-    // Crear el contenido HTML para el modal
-      const modalHTML = `
-      <div class="modal-container">
-        <img class = "img_modal"src="${image}" alt="imagen">
-        <h1 class = "modal_name">${name}</h1>
-        <h2 class="modal_description">${description}</h2>
-        <p class="modal_precio">$${price}.00</p>
-        <p class="modal_stock">Stock: ${stock}</p>
-        
-              ${product.quantity ? `<i class='bx bx-plus plus_modal' id = '${product.id}'></i>` : '<p class="soldOut">sold out</p>'}
+          
+          // Agregar evento de clic a la descripción del producto
+          const descriptionProducts = document.querySelectorAll(".description_product");
+          descriptionProducts.forEach((descriptionProduct) => {
+          descriptionProduct.addEventListener("click", () => {
             
-        </div>
-        <script>
+        
+          // Obtener los datos del producto del atributo "data-"
+          const description = descriptionProduct.getAttribute("data-description");        
+          const id = descriptionProduct.getAttribute("data-id");
+          
+          const image = descriptionProduct.getAttribute("data-image");
+          const price = descriptionProduct.getAttribute("data-price");
+          const stock = descriptionProduct.getAttribute("data-stock");
+          const name = descriptionProduct.getAttribute("data-name");
 
-        const plusModal = document.querySelector(".plus_modal");
-        alert(plusModal);
+          // Crear el contenido HTML para el modal
+          const modalHTML = `
+          <div class="modal-container">
+            <img class = "img_modal"src="${image}" alt="imagen">
+            <h1 class = "modal_name">${name}</h1>
+            <h2 class="modal_description">${description}</h2>
+            <p class="modal_precio">$${price}.00</p>
+            <p class="modal_stock">Stock: ${stock}</p>
+            <p class="modal_id">id: ${id}</p>
+            
+                  ${product.quantity ? `<i class='bx bx-plus plus_modal' id = '${product.id}'></i>` : '<p class="soldOut">sold out</p>'}
+                
+            </div>
+    
+          `;
 
-        </script>
-      `;
 
+        // Mostrar un modal con la descripción del producto y su información
+          Swal.fire({            
+              html: modalHTML,
+              showCloseButton: false,
+              showConfirmButton: false,
+              scrollbarPadding: false,
+              didOpen: () => {            
+                
+                idModal(id);
 
-    // Mostrar un modal con la descripción del producto y su información
-      Swal.fire({            
-          html: modalHTML,
-          showCloseButton: false,
-          showConfirmButton: false,
+              }
+              
+              
+          });
           
       });
-  });
-});
+      
+    });
+
 }
+
 
 function pintarProducts(db) {
 
@@ -299,18 +346,18 @@ modal();
 }
 
 function mostrarCart() {
-   const cartIconHTML = document.querySelector(".cart_icon");
-   const cartHTML = document.querySelector(".cart");
-   
-   cartIconHTML.addEventListener("click", function () {
+  const cartIconHTML = document.querySelector(".cart_icon");
+  const cartHTML = document.querySelector(".cart");
+
+  cartIconHTML.addEventListener("click", function () {
       cartHTML.classList.add("cart_show");
-   });
+  });
 
-   const hiddenCartHTML = document.querySelector(".cart_cerrar");
+  const hiddenCartHTML = document.querySelector(".cart_cerrar");
 
-   hiddenCartHTML.addEventListener("click", function () {
+  hiddenCartHTML.addEventListener("click", function () {
       cartHTML.classList.remove("cart_show");
-   });
+  });
 }
 
 function cerrarCart() {
@@ -323,7 +370,7 @@ function cerrarCart() {
 
 function insertarProductosAlCart(db) {
   const cardProducts = document.querySelector(".card_products");
-
+  
   let html = "";
 
   for (const product in db.cart) {
@@ -346,15 +393,16 @@ function insertarProductosAlCart(db) {
                         <i class='bx bx-plus plus_add'></i>                        
                         <i class='bx bxs-trash' ></i>
                       </div>
-               </div>
+                </div>
             </div>
             </div>
-         `;
-   }
-   infoDeCompra(db);
-   cantidaiconcarrito(db);
-   cardProducts.innerHTML = html;
-   
+        `;
+  }
+    infoDeCompra(db);
+    cantidaiconcarrito(db);
+    cardProducts.innerHTML = html;
+    window.localStorage.setItem("cart", JSON.stringify(db.cart));
+
 
 }
 
@@ -373,6 +421,7 @@ function validarDatosCart(db) {
             title: `Lo siento, solo disponemos de ${productFind.quantity} unidades.`,
             icon: "error",
             confirmButtonText: "Aceptar",
+            scrollbarPadding: false,
 
           });
         } else {
@@ -381,23 +430,30 @@ function validarDatosCart(db) {
             text: "Producto agregado al carrito",
             timer: 1000,
             timerProgressBar: true,
+            scrollbarPadding: false,
+            
+
           });              
           db.cart[productFind.id].amount++;
           
         }
       } else {          
+         window.localStorage.setItem("cart", JSON.stringify(db.cart));
         db.cart[productFind.id] = { ...productFind, amount: 1 }; 
         Swal.fire({
           icon: "success",
           text: "Producto agregado al carrito",
           timer: 1000,
           timerProgressBar: true,
-        });    
+          scrollbarPadding: false,
+          
+        });   
       }
 
       window.localStorage.setItem("cart", JSON.stringify(db.cart));
       insertarProductosAlCart(db);
       infoDeCompra(db);
+      modal(db)
     }
   })
 
@@ -405,79 +461,19 @@ function validarDatosCart(db) {
 }
 
 
-function manejoDatosCart(db) {
-  const cartProducts = document.querySelector(".card_products");
-
-  cartProducts.addEventListener("click", function (e) {
-    if (e.target.classList.contains("bx-plus")) {
-      const id = Number(e.target.parentElement.id);
-      const productFind = db.products.find((product) => product.id === id);
-
-      if (productFind.quantity === db.cart[productFind.id].amount) {
-        // Mostrar un modal de confirmación utilizando Sweet Alert
-        Swal.fire({
-          title: `Lo siento, solo disponemos de ${productFind.quantity} unidades.`,
-          icon: "error",
-          confirmButtonText: "Aceptar",
-        });
-      } else {
-        db.cart[id].amount++;
-        window.localStorage.setItem("cart", JSON.stringify(db.cart));
-        insertarProductosAlCart(db);
-      }
-    }
-    if (e.target.classList.contains("bx-minus")) {
-      const id = Number(e.target.parentElement.id);
-      if (db.cart[id].amount === 1) {
-        // Mostrar un modal de confirmación utilizando Sweet Alert
-        Swal.fire({
-          title: "¿Estás seguro de que quieres eliminar este producto?",
-          showCancelButton: true,
-          confirmButtonText: "Eliminar",
-          cancelButtonText: "Cancelar",
-          
-        }).then((result) => {
-          if (result.isConfirmed) {
-            delete db.cart[id];
-            window.localStorage.setItem("cart", JSON.stringify(db.cart));
-            insertarProductosAlCart(db);            
-          }
-        });
-      } else {
-        db.cart[id].amount--;
-        window.localStorage.setItem("cart", JSON.stringify(db.cart));
-        insertarProductosAlCart(db);
-      }
-    }
-    if (e.target.classList.contains("bxs-trash")) {
-      const id = Number(e.target.parentElement.id);
-      // Mostrar un modal de confirmación utilizando Sweet Alert
-      Swal.fire({
-        title: "¿Estás seguro de que quieres eliminar este producto?",
-        showCancelButton: true,
-        confirmButtonText: "Eliminar",
-        cancelButtonText: "Cancelar",
-        
-      }).then((result) => {
-        if (result.isConfirmed) {
-          delete db.cart[id];
-          window.localStorage.setItem("cart", JSON.stringify(db.cart));
-          insertarProductosAlCart(db);
-        }
-      });
-    }
-  });
-}
 
 function logicacompra(db) {
+  
   const btnBuy = document.querySelector(".btn_comprar");
   btnBuy.addEventListener("click", function () {
+    
     if (!Object.values(db.cart).length) {
       Swal.fire({
         title: "¡El carrito está vacío!",
         icon: "error",
         confirmButtonText: "Aceptar",
-        
+        scrollbarPadding: false,
+            
       });
       return;
     }
@@ -490,6 +486,8 @@ function logicacompra(db) {
       cancelButtonColor: "#d33",
       confirmButtonText: "Sí, comprar",
       cancelButtonText: "Cancelar",
+      scrollbarPadding: false,
+            
       
     }).then((result) => {
       if (result.isConfirmed) {
@@ -519,6 +517,8 @@ function logicacompra(db) {
             title: "¡Gracias por su compra!",
             icon: "success",
             confirmButtonText: "Aceptar",
+            scrollbarPadding: false,
+            
             
           }).then(() => {
             pintarProducts(db);
@@ -529,14 +529,15 @@ function logicacompra(db) {
             title: "¡No hay productos en el carrito que se puedan comprar!",
             icon: "error",
             confirmButtonText: "Aceptar",
+            scrollbarPadding: false,
             
           });
         }
       }
+      
     });
   });
 }
-
 
 function infoDeCompra(db) {
   const infoTotal = document.querySelector(".info_total");
@@ -601,28 +602,184 @@ async function main() {
     mostrarCart();
     insertarProductosAlCart(db);
     validarDatosCart(db);
-    manejoDatosCart(db);
+    
     logicacompra(db);
     infoDeCompra(db);
     cantidaiconcarrito(db);    
     toggleDarkMode();
     buttonSelected();
     nav();    
-    pintarProducts(db);    
-    opening();
+    pintarProducts(db);   
+    
     filtrado(db);
     nav();
     colorEnlaces();
     linksMenu();
     mostrarCart();
     loading();
+    manejoDatosCart(db)
     
     
+    
+
 }
 main();
 
+function removeProductFromCart(productId) {
+  const cart = JSON.parse(localStorage.getItem('cart'));
+
+  if (cart.hasOwnProperty(productId)) {
+    delete cart[productId];
+    localStorage.setItem('cart', JSON.stringify(cart));
+    console.log(`El producto con id ${productId} ha sido eliminado del carrito.`);
+  } else {
+    console.log(`No se encontró ningún producto con id ${productId} en el carrito.`);
+  }
+}
 
 
+function manejoDatosCart(db) {
+
+    const cartProducts = document.querySelector(".card_products");
+    cartProducts.addEventListener("click", function (e) {
+    if (e.target.classList.contains("bx-plus")) {      
+
+      const id = Number(e.target.parentElement.id);
+      console.log('el ide es' + id);
+
+      const productFind = db.products.find((product) => product.id === id);
+
+      console.log('he ecnontrado un filtro' + productFind);
+      if (productFind.quantity === db.cart[productFind.id].amount) {
+        // Mostrar un modal de confirmación utilizando Sweet Alert
+        Swal.fire({
+          title: `Lo siento, solo disponemos de ${productFind.quantity} unidades.`,
+          icon: "error",
+          confirmButtonText: "Aceptar",
+          scrollbarPadding: false,
+            
+        });
+      } else {
+        db.cart[id].amount++;
+        insertarProductosAlCart(db);
+        window.localStorage.setItem("cart", JSON.stringify(db.cart));
+        
+        
+      }
+    }
+    if (e.target.classList.contains("bx-minus")) {
+      const id = Number(e.target.parentElement.id);
+      if (db.cart[id].amount === 1) {
+        // Mostrar un modal de confirmación utilizando Sweet Alert
+        Swal.fire({
+          title: "¿Estás seguro de que quieres eliminar este producto?",
+          showCancelButton: true,
+          confirmButtonText: "Eliminar",
+          cancelButtonText: "Cancelar",
+          scrollbarPadding: false,
+            
+          
+        }).then((result) => {
+          if (result.isConfirmed) {
+            delete db.cart[id];
+            insertarProductosAlCart(db);
+            window.localStorage.setItem("cart", JSON.stringify(db.cart));
+            
+                  
+          }
+        });
+      } else {
+        db.cart[id].amount--;
+        insertarProductosAlCart(db);
+        window.localStorage.setItem("cart", JSON.stringify(db.cart));
+        
+        
+      }
+    }
+    if (e.target.classList.contains("bxs-trash")) {
+      const id = Number(e.target.parentElement.id);
+      // Mostrar un modal de confirmación utilizando Sweet Alert
+      Swal.fire({
+        title: "¿Estás seguro de que quieres eliminar este producto?",
+        showCancelButton: true,
+        confirmButtonText: "Eliminar",
+        cancelButtonText: "Cancelar",
+        scrollbarPadding: false,
+            
+        
+      }).then((result) => {
+        if (result.isConfirmed) {
+          delete db.cart[id];
+          insertarProductosAlCart(db);
+          
+          window.localStorage.setItem("cart", JSON.stringify(db.cart));
+          
+          
+        }
+      });
+    }
+  });
+}
+
+
+async function idModal(id) {  
+  console.log(typeof(id));
+
+  const db = {
+    products:
+      JSON.parse(window.localStorage.getItem("products")) ||
+      (await getProducts()),
+    cart: JSON.parse(window.localStorage.getItem("cart")) || {},
+  };
+
+
+
+  const plusModal = document.querySelector('.plus_modal')
+
+  plusModal.addEventListener('click', function(){
+  
+
+    const idModal = Number(id);
+    
+    
+    const productFind = db.products.find((product) => product.id === idModal);
+    
+    if (db.cart[productFind.id]) {
+      if (productFind.quantity === db.cart[productFind.id].amount) {
+        Swal.fire({
+          title: `Lo siento, solo disponemos de ${productFind.quantity} unidades.`,
+          icon: "error",
+          confirmButtonText: "Aceptar",          
+        });
+        window.localStorage.setItem("cart", JSON.stringify(db.cart));
+      } else {
+        Swal.fire({
+          icon: "success",
+          text: "Producto agregado al carrito",
+          timer: 1000,
+          timerProgressBar: true,
+        });              
+        db.cart[productFind.id].amount++;
+        window.localStorage.setItem("cart", JSON.stringify(db.cart));
+      }
+    } else {          
+      db.cart[productFind.id] = { ...productFind, amount: 1 };
+      window.localStorage.setItem("cart", JSON.stringify(db.cart)); 
+      Swal.fire({
+        icon: "success",
+        text: "Producto agregado al carrito",
+        timer: 1000,
+        timerProgressBar: true,
+      });
+         
+    }
+        window.localStorage.setItem("cart", JSON.stringify(db.cart));
+        insertarProductosAlCart(db);
+        manejoDatosCart(db)
+  })
+
+  
+}
 
 
 

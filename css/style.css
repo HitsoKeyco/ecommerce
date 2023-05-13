@@ -20,8 +20,14 @@
     border-radius: 5px; /* Borde redondeado del thumb */
     }
 
+/*evita el desplazamiento del html por  alertas */
+.swal2-show {
+    overflow: hidden !important;
+}
 
-
+html{
+    overflow-x: hidden;
+}
 
 :root {
         --body-color: hsl(206, 4%, 97%);        
@@ -31,6 +37,7 @@
         --white: white;
         --black:  rgb(0, 0, 0);
         --bandcolor: hsl(354, 78%, 60%);
+        --bandcolor2: hsla(197, 48%, 52%, 0.555);
         --textnavseleccion: hsl(354, 78%, 60%);        
         --button-color: hsl(0, 0%, 17%);
         --shadow-general: 0 .5rem 1rem rgba(0, 0, 0, .15);
@@ -44,11 +51,11 @@
 
 
 
-
-
 body {
     background-color: var(--body-color);
+    overflow: auto;
 }
+
 
 .load {
     position: fixed;
@@ -73,6 +80,10 @@ body {
     animation: mover 1s ease-in-out infinite alternate;    
 }
 
+.buzo{
+    animation: mover 1s ease-in-out infinite alternate;    
+}
+
 .shadows {
     position: absolute;
     top: 600px;
@@ -80,10 +91,7 @@ body {
     width: 10px;
     height: 4px;
     border-radius: 50%;
-
     background-color: var(--button-color);
-    
-    
 }
 
 .shadows {
@@ -92,23 +100,23 @@ body {
     width: 40px;
     height: 4px;
     border-radius: 50%;
-    background-color: rgb(219, 97, 97);
+    background-color: var(--bandcolor);
     animation: growAndShrink 2s ease-in-out infinite;
-    box-shadow: 0px 0px 8px 2px rgba(209, 123, 123, 0.2);
-  }
-  
-  
-  @keyframes growAndShrink {
+    box-shadow: 0px 0px 8px 2px var(--bandcolor);
+}
+
+
+@keyframes growAndShrink {
     0% {
-     transform: scale(1);
+        transform: scale(1);
     }
     50% {
-      transform: scale(2);
+        transform: scale(2);
     }
     100% {
-      transform: scale(1);
+        transform: scale(1);
     }
-  }
+}
 @keyframes mover {
     0% {
         transform: translateY(-10px);
@@ -235,7 +243,7 @@ a { /* Enlaces del nav */
 
 .menu_show {  /* clase q muestra el menu oculto por medio de una funcion*/
     right: 0;
- 
+
 }
 
 .menu_izquierdo{
@@ -258,6 +266,7 @@ a.active {
     font-weight: bold ;
 }
 /*-- Fin codigo para dejar rastro de color en un evento click-- */
+
 
 
 
@@ -338,14 +347,20 @@ a.active {
 .card_product {      
     display: flex;    
     align-items: center;
-    padding-bottom: 10px;
-    
+    padding: 10px;
+    box-shadow: var(--shadow-general);
+    border-radius: 10px;
     
     
 }
 
 .card_products{    
     overflow: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    
+    
     
 }
 
@@ -481,6 +496,7 @@ a.active {
     background-color: var(--bandcolor);
     height: 43.5vh;
     width: 100%;
+    
 
     display: flex;
     justify-content: center;
@@ -530,14 +546,28 @@ a.active {
     color: var(--textcolorwhiteglobal);   
     margin-top: 15px;
     border-radius: 5px;
+    
+    
 }
 
 
 
 .section_2 :nth-child(4):hover {
     background-color: var(--bandcolor);
-    transition: 0.3s;
+    transition: 0.111s;
     color: var(--button-color);
+    animation: glow 0.5s;
+    
+}
+
+
+@keyframes glow {
+    0% {
+        box-shadow: 0 0 0 0 var(--bandcolor);
+    }
+    100% {
+        box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
+    }
 }
 
 .button_filters{
@@ -557,19 +587,42 @@ a.active {
 .button_category{
     width: 122px;
     height: 50px;
-    border: none;
-    background-color: transparent;
-    color: inherit;
+    border: none;    
     cursor: pointer;
     border-radius: 5px;
-    color: var(--textnavcolor);   
+    color: var(--text-color-light);
+}
 
+.button_category:not(.defect):hover {
+    animation: glow 0.5s;
 }
-.button_category:hover{
-    background-color: var(--button-color);
-    color: var(--textcolorwhiteglobal);
-    transition: 0.4s;
+
+.shake-button {
+    animation: shake 0.5s;
 }
+
+    @keyframes shake {
+    0% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }
+    20%, 40%, 60%, 80% { transform: translateX(10px); }
+    100% { transform: translateX(0); }
+}
+
+
+button{
+    background-color: transparent;
+}
+
+.defect{
+    color: white;
+    background-color: var(--button-color);    
+}
+
+.selected:hover {
+    animation: glow 0.5s;
+  }
+  
+
 
 .title_button {
     font-size: 1.1em;
@@ -649,6 +702,7 @@ a.active {
 .description_product:hover{
     color: var(--bandcolor);
     transition: 0.3s;
+    
 }
 
 .img_producto {
@@ -659,6 +713,7 @@ a.active {
 
 .img_producto:hover {
     transform: translateY(-10px);
+    
 }
 .plus{
     cursor: pointer;
@@ -679,10 +734,12 @@ a.active {
     font-size: 1.5em;
 }
 
+
 .plus:hover{
     background-color: var(--bandcolor);
     transition: 0.3s;
     color: var(--white);
+    animation: glow 0.5s;
     
     
 }
@@ -702,6 +759,9 @@ a.active {
 
 .img_modal{
     width: 90%;
+    
+}
+.modal_id{
     
 }
 
@@ -765,6 +825,7 @@ a.active {
 .plus_modal:hover{
     color: var(--white);
     background-color: var(--bandcolor);
+    animation: glow 0.5s;
     
 }
 
@@ -874,6 +935,7 @@ a.active {
     
 }
 
+
 @media (min-width:700px) {
 
     .contenido {
@@ -883,6 +945,7 @@ a.active {
         grid-template-rows: auto 1fr;
     }
     
+
     .banda {
         grid-column: 2 / 3;
         grid-row: 1 / 2;
@@ -999,13 +1062,8 @@ a.active {
     width: 70%;
     gap: 20px;
     margin-top: 45px;
-    
-    
+
 }
-
-
-    
-
 
 }
 
@@ -1014,6 +1072,9 @@ a.active {
     .nav {
         width: 1024px
     }
+
+
+ 
 
 
     .container{
