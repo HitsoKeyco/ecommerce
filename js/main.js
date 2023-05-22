@@ -345,6 +345,7 @@ modal();
 
 }
 
+
 function mostrarCart() {
   const cartIconHTML = document.querySelector(".cart_icon");
   const cartHTML = document.querySelector(".cart");
@@ -366,6 +367,11 @@ function cerrarCart() {
   hiddenCartHTML.addEventListener("click", function () {
     cartHTML.classList.remove("cart_show");
   });
+}
+
+function cerrarCartCompra() {
+  const cartHTML = document.querySelector(".cart");
+  cartHTML.classList.remove("cart_show");
 }
 
 function insertarProductosAlCart(db) {
@@ -398,12 +404,12 @@ function insertarProductosAlCart(db) {
             </div>
         `;
   }
-    infoDeCompra(db);
-    cantidaiconcarrito(db);
+
     cardProducts.innerHTML = html;
     window.localStorage.setItem("cart", JSON.stringify(db.cart));
 
-
+    infoDeCompra(db);
+    cantidaiconcarrito(db);
 }
 
 function validarDatosCart(db) {
@@ -414,7 +420,7 @@ function validarDatosCart(db) {
       const id = Number(e.target.id);
 
       const productFind = db.products.find((product) => product.id === id);
-
+      // ------
       if (db.cart[productFind.id]) {
         if (productFind.quantity === db.cart[productFind.id].amount) {
           Swal.fire({
@@ -422,7 +428,6 @@ function validarDatosCart(db) {
             icon: "error",
             confirmButtonText: "Aceptar",
             scrollbarPadding: false,
-
           });
         } else {
           Swal.fire({
@@ -431,8 +436,6 @@ function validarDatosCart(db) {
             timer: 1000,
             timerProgressBar: true,
             scrollbarPadding: false,
-            
-
           });              
           db.cart[productFind.id].amount++;
           
@@ -453,7 +456,8 @@ function validarDatosCart(db) {
       window.localStorage.setItem("cart", JSON.stringify(db.cart));
       insertarProductosAlCart(db);
       infoDeCompra(db);
-      modal(db)
+      modal(db);
+      
     }
   })
 
@@ -523,6 +527,7 @@ function logicacompra(db) {
           }).then(() => {
             pintarProducts(db);
             insertarProductosAlCart(db);
+            cerrarCartCompra();
           });
         } else {
           Swal.fire({
@@ -598,26 +603,25 @@ async function main() {
       cart: JSON.parse(window.localStorage.getItem("cart")) || {},
   };
 
-    navlink();    
-    mostrarCart();
-    insertarProductosAlCart(db);
-    validarDatosCart(db);
-    
-    logicacompra(db);
-    infoDeCompra(db);
-    cantidaiconcarrito(db);    
+    navlink();
+    nav();
     toggleDarkMode();
     buttonSelected();
-    nav();    
-    pintarProducts(db);   
-    
-    filtrado(db);
-    nav();
     colorEnlaces();
-    linksMenu();
-    mostrarCart();
+    linksMenu();    
     loading();
-    manejoDatosCart(db)
+    mostrarCart();
+
+
+
+    insertarProductosAlCart(db);
+    validarDatosCart(db);    
+    logicacompra(db);
+    infoDeCompra(db);
+    cantidaiconcarrito(db); 
+    pintarProducts(db);   
+    filtrado(db);
+    manejoDatosCart(db);
     
     
     
@@ -639,21 +643,22 @@ function removeProductFromCart(productId) {
 
 
 function manejoDatosCart(db) {
-
+  
+  
     const cartProducts = document.querySelector(".card_products");
     cartProducts.addEventListener("click", function (e) {
     if (e.target.classList.contains("bx-plus")) {      
-
+      insertarProductosAlCart(db);
       const id = Number(e.target.parentElement.id);
-      console.log('el ide es' + id);
+      
 
       const productFind = db.products.find((product) => product.id === id);
 
-      console.log('he ecnontrado un filtro' + productFind);
+      
       if (productFind.quantity === db.cart[productFind.id].amount) {
         // Mostrar un modal de confirmación utilizando Sweet Alert
         Swal.fire({
-          title: `Lo siento, solo disponemos de ${productFind.quantity} unidades.`,
+          title: `Lo siento, solo disponemos dede ${productFind.quantity} unidades.`,
           icon: "error",
           confirmButtonText: "Aceptar",
           scrollbarPadding: false,
@@ -662,11 +667,11 @@ function manejoDatosCart(db) {
       } else {
         db.cart[id].amount++;
         insertarProductosAlCart(db);
-        window.localStorage.setItem("cart", JSON.stringify(db.cart));
-        
-        
+        window.localStorage.setItem("cart", JSON.stringify(db.cart));  
       }
     }
+
+
     if (e.target.classList.contains("bx-minus")) {
       const id = Number(e.target.parentElement.id);
       if (db.cart[id].amount === 1) {
@@ -710,8 +715,8 @@ function manejoDatosCart(db) {
       }).then((result) => {
         if (result.isConfirmed) {
           delete db.cart[id];
-          insertarProductosAlCart(db);
-          
+
+          insertarProductosAlCart(db);          
           window.localStorage.setItem("cart", JSON.stringify(db.cart));
           
           
@@ -723,7 +728,7 @@ function manejoDatosCart(db) {
 
 
 async function idModal(id) {  
-  console.log(typeof(id));
+  
 
   const db = {
     products:
@@ -732,16 +737,10 @@ async function idModal(id) {
     cart: JSON.parse(window.localStorage.getItem("cart")) || {},
   };
 
-
-
   const plusModal = document.querySelector('.plus_modal')
 
   plusModal.addEventListener('click', function(){
-  
-
-    const idModal = Number(id);
-    
-    
+    const idModal = Number(id);    
     const productFind = db.products.find((product) => product.id === idModal);
     
     if (db.cart[productFind.id]) {
@@ -749,35 +748,45 @@ async function idModal(id) {
         Swal.fire({
           title: `Lo siento, solo disponemos de ${productFind.quantity} unidades.`,
           icon: "error",
-          confirmButtonText: "Aceptar",          
+          confirmButtonText: "Aceptar",
+          scrollbarPadding: false,
         });
-        window.localStorage.setItem("cart", JSON.stringify(db.cart));
       } else {
         Swal.fire({
           icon: "success",
           text: "Producto agregado al carrito",
           timer: 1000,
           timerProgressBar: true,
+          scrollbarPadding: false,
         });              
         db.cart[productFind.id].amount++;
-        window.localStorage.setItem("cart", JSON.stringify(db.cart));
+        
       }
     } else {          
-      db.cart[productFind.id] = { ...productFind, amount: 1 };
-      window.localStorage.setItem("cart", JSON.stringify(db.cart)); 
+      window.localStorage.setItem("cart", JSON.stringify(db.cart));
+      db.cart[productFind.id] = { ...productFind, amount: 1 }; 
       Swal.fire({
         icon: "success",
         text: "Producto agregado al carrito",
         timer: 1000,
         timerProgressBar: true,
-      });
-         
+        scrollbarPadding: false,
+        
+      });   
     }
-        window.localStorage.setItem("cart", JSON.stringify(db.cart));
-        insertarProductosAlCart(db);
-        manejoDatosCart(db)
+      window.localStorage.setItem("cart", JSON.stringify(db.cart));
+      insertarProductosAlCart(db);      
+      logicacompra(db);
+      validarDatosCart(db);
+      manejoDatosCart(db);
+    
+
+    
   })
 
+
+  
+  
   
 }
 
